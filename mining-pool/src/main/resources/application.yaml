@@ -1,0 +1,60 @@
+server:
+  port: 58085
+  servlet:
+    context-path: /statter/mining/pool/api
+spring:
+  application:
+    name: statter-mining-pool
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT:3306}/${MYSQL_DB:statter}?characterEncoding=UTF-8&useSSL=false&autoReconnect=true&useUnicode=true
+    username: ${MYSQL_USERNAME:statter}
+    password: ${MYSQL_PASSWORD:statter}
+    type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+    initialSize: 1
+    minIdle: 1
+    maxActive: 10
+    maxWait: 100
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 from DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000' #通过connectProperties属性来打开mergeSql功能;慢SQL记录
+
+  redis:
+    database: 0
+    host: ${REDIS_HOST:192.168.1.164}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:}
+    cache:
+      default:
+        timeout: ${REDIS_DEFAULT_TIMEOUT:1800}
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+swagger:
+  enable: ${SHOW_SWAGGER:false} # http://127.0.0.1:58085/statter/mining/pool/api/swagger-ui.html
+
+mybatis:
+  mapper-locations: classpath:com/synctech/statter/base/mapper/*.xml
+  type-aliases-package: com.synctech.statter.base.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
+    cache-enabled: true
+    call-setters-on-nulls: true
+
+
