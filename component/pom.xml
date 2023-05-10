@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.synctech</groupId>
+        <artifactId>statter</artifactId>
+        <version>1.1.1</version>
+    </parent>
+    <artifactId>statter.component</artifactId>
+    <packaging>pom</packaging>
+    <description>Some independent components are selected according to the project needs</description>
+
+    <modules>
+        <module>redis</module>
+        <module>minio</module>
+
+    </modules>
+
+</project>

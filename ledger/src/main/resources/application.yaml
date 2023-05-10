@@ -1,0 +1,78 @@
+server:
+  port: 58081
+  servlet:
+    context-path: /statter/ledger/api
+spring:
+  application:
+    name: statter-ledger
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:192.168.1.164}:${MYSQL_PORT:3306}/${MYSQL_DB:statter}?characterEncoding=UTF-8&useSSL=false&autoReconnect=true&useUnicode=true
+    username: ${MYSQL_USERNAME:statter}
+    password: ${MYSQL_PASSWORD:statter}
+    type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+    initialSize: 1
+    minIdle: 1
+    maxActive: 10
+    maxWait: 100
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 from DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000'
+
+  redis:
+    database: 0
+    host: ${REDIS_HOST:192.168.1.164}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:}
+    cache:
+      default:
+        timeout: ${REDIS_DEFAULT_TIMEOUT:1800}
+  #    lettuce:
+  #      pool:
+  #        max-active: 8
+  #        max-idle: 8
+  #        min-idle: 0
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+swagger:
+  enable: ${SHOW_SWAGGER:false}
+
+mybatis:
+  type-aliases-package: com.synctech.statter.base.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
+    cache-enabled: true
+    call-setters-on-nulls: true
+
+logging:
+  config: classpath:logback.xml
+
+statter:
+  task:
+    fixed-load: ${MINING_TASK_FIX_LOAD:} # control mining task work load difficulty(The highest priority)
+    difficulty-decrease: ${MINING_TASK_DIFFICULTY_DECREASE:0} # control mining task work load difficulty
+    c-count: ${MINING_TASK_CCOUNT:100}
+  pool:
+    host: ${POOL_HOST:192.168.1.164}
+    port: ${POOL_PORT:80}
+    get-block-index-url: http://<host>:<port>/gateway/gateway/getBlockIndex
+    get-pool-task-url: http://<host>:<port>/gateway/gateway/accept
+    commit-pool-task-url: http://<host>:<port>/gateway/gateway/result
+

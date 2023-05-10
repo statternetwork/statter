@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.synctech</groupId>
+        <artifactId>statter.common</artifactId>
+        <version>1.1.1</version>
+    </parent>
+    <artifactId>statter.common.service</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+
+    </properties>
+
+    <dependencies>
+        <!-- base -->
+        <dependency>
+            <groupId>com.synctech</groupId>
+            <artifactId>statter.common.constant</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.synctech</groupId>
+            <artifactId>statter.common.util</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.synctech</groupId>
+            <artifactId>statter.common.pool</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.synctech</groupId>
+            <artifactId>statter.common.base</artifactId>
+            <version>${project.parent.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-autoconfigure</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- component -->
+        <dependency>
+            <groupId>com.synctech</groupId>
+            <artifactId>statter.component.redis</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- json/gson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <!--<version>1.2.31</version>-->
+            <version>2.0.10</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

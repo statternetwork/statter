@@ -1,0 +1,20 @@
+server:
+  port: 9010
+  servlet:
+    context-path: /gateway
+spring:
+  application:
+    name: statter-mock
+  redis:
+    database: 0
+    host: ${REDIS_HOST:192.168.1.164}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:}
+    cache:
+      default:
+        timeout: ${REDIS_DEFAULT_TIMEOUT:1800}
+swagger:
+  enable: ${SHOW_SWAGGER:false}
+statter:
+  task:
+    fixed-load: "00000"

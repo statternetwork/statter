@@ -1,0 +1,64 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <!-- zip,tar,tar.gz,tar.bz2,jar,dir,war -->
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <!-- The output path of the dependent package -->
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+    <!-- Files that need to be packed -->
+    <fileSets>
+        <!-- Output all the files in the bin directory to the BIN directory after packing -->
+        <fileSet>
+            <directory>bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <filtered>true</filtered>
+            <includes>
+                <include>*.*</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <!-- Output all the files in the src/main/resources directory to the config directory after packing -->
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>
+        </fileSet>
+        <!-- Package the project JAR to the lib directory -->
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>${project.artifactId}-${project.version}.jar</include>
+            </includes>
+        </fileSet>
+        <!-- Package the project description document to the docs directory -->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>docs</outputDirectory>
+            <includes>
+                <include>*.md</include>
+            </includes>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>docs</directory>
+            <outputDirectory>docs</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/assembly/docs</directory>
+            <outputDirectory>docs</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+
+    </fileSets>
+</assembly>

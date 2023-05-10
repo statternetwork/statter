@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="contextName" value="statter.ledger.api"/>
+    <property name="LOG_PATH" value="logs"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="com.synctech.statter" level="debug"/>
+    <logger name="org.springframework.jdbc" level="info"/>
+
+</configuration>
