@@ -28,11 +28,11 @@ public interface PromotionMapper {
     List<Promotion> findAll();
 
     @Select("SELECT * FROM promotion " +
-            "WHERE `code` LIKE '%${kw}%' OR `alias` LIKE '%${kw}%' " +
+            "WHERE `code` LIKE concat('%',${kw},'%') OR `alias` LIKE concat('%',${kw},'%') " +
             "ORDER BY minerCount DESC LIMIT ${si},${size};")
     List<Promotion> page(@Param("si") int si, @Param("size") int size, @Param("kw") String kw);
     @Select("SELECT COUNT(address) FROM promotion " +
-            "WHERE `code` LIKE '%${kw}%' OR `alias` LIKE '%${kw}%' " +
+            "WHERE `code` LIKE concat('%',${kw},'%') OR `alias` LIKE concat('%',${kw},'%') " +
             ";")
     int count(@Param("kw") String kw);
 
