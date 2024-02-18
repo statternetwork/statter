@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MinerMapper {
 
-    @Insert("INSERT INTO miner (`sn`, `walletAddress`, `promotionAddress`, `hasPledged`, `pledgeProcessId`, `hasTaxed`, `taxProcessId`) " + //
+    @Insert("INSERT INTO miner (`sn`, `leaveFactory`, `walletAddress`, `promotionAddress`, `hasPledged`, `pledgeProcessId`, `hasTaxed`, `taxProcessId`) " + //
             "VALUES (#{m.sn}, #{m.walletAddress}, #{m.promotionAddress}, #{m.hasPledged}, #{m.pledgeProcessId}, #{m.hasTaxed}, #{m.taxProcessId} );")
     void add(@Param("m") Miner m);
 
@@ -26,8 +26,20 @@ public interface MinerMapper {
             " </script>")
     void update(@Param("m") Miner m);
 
+    @Update("<script> UPDATE miner SET `leaveFactory`=#{m.leaveFactory} WHERE `sn`=#{m.sn}; </script>")
+    void updateLeaveFactory(@Param("m") Miner m);
+
+    @Update("<script> UPDATE miner SET `v`=#{v},`ver`=#{ver} WHERE `sn`=#{sn}; </script>")
+    void updateVer(@Param("sn") String sn, @Param("v") int v, @Param("ver") String ver);
+
+    @Update("<script> UPDATE miner SET `dv`=#{dv} WHERE `sn`=#{sn}; </script>")
+    void updateDv(@Param("sn") String sn, @Param("dv") String dv);
+
     @Update("UPDATE miner SET `walletAddress`=#{a},`bindDate`=NOW() WHERE `sn`=#{sn};")
     void updateWalletAddress(@Param("sn") String sn, @Param("a") String a);
+
+    @Update("UPDATE miner SET `promotionAddress`=#{pa} WHERE `sn`=#{sn};")
+    void updatePromotionAddress(@Param("sn") String sn, @Param("pa") String pa);
 
     @Update("UPDATE miner SET `machineId`=#{mi},`cpuModelName`=#{cm} WHERE `sn`=#{sn};")
     void updateMachineId(@Param("sn") String sn, @Param("mi") String mi, @Param("cm") String cm);
@@ -49,6 +61,9 @@ public interface MinerMapper {
 
     @Select("SELECT * FROM miner WHERE `walletAddress`=#{walletAddress} ORDER BY `bindDate` DESC;")
     List<Miner> findByWalletAddress(@Param("walletAddress") String walletAddress);
+
+    @Update("UPDATE miner SET `promotionAddress`=#{promotionAddress} WHERE `walletAddress`=#{walletAddress};")
+    void updatePromotionByWalletAddress(@Param("walletAddress") String walletAddress, @Param("promotionAddress") String promotionAddress);
 
     @Select("SELECT * FROM miner WHERE `promotionAddress`=#{promotionAddress} ORDER BY `walletAddress`, `bindDate` DESC;")
     List<Miner> findByPromotionAddress(@Param("promotionAddress") String promotionAddress);

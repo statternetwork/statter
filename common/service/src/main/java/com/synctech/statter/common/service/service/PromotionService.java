@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
@@ -41,7 +41,7 @@ public class PromotionService {
     @Autowired
     WalletMapper walletMapper;
 
-    @Resource
+    @Autowired
     MinerMapper minerMapper;
 
     public Promotion add(Promotion promotion) {
@@ -71,7 +71,15 @@ public class PromotionService {
                 new Hget<>(CacheKey.CACHEKEY_INFO_PROMOTION_BY_ADDRESS, address, CacheKey.CACHEKEY_INFO_PROMOTION_BY_ADDRESS_LOCK, Promotion.class),
                 p -> promotionMapper.findOne(p.getField()));
         if (null == promotion) {
-            throw new AppBizException(HttpStatusExtend.ERROR_PROMOTION_NOT_FOUND);
+            throw new AppBizException(HttpStatusExtend.ERROR_PROMOTION_NOT_FOUND, address);
+        }
+        return promotion;
+    }
+
+    public Promotion findByAlias(String alias) {
+        Promotion promotion = promotionMapper.findOne(alias);
+        if (null == promotion) {
+            return null;
         }
         return promotion;
     }

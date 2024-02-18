@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Order(2)
 @Configuration
 @EnableCaching
@@ -50,8 +51,8 @@ public class RedisConfig {
 
     @Bean
     public RedisSerializer<Object> redisValueSerializer() {
-//        return new GenericJackson2JsonRedisSerializer();
-//        return new JdkSerializationRedisSerializer();
+        // return new GenericJackson2JsonRedisSerializer();
+        // return new JdkSerializationRedisSerializer();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
@@ -60,12 +61,13 @@ public class RedisConfig {
         return jackson2JsonRedisSerializer;
     }
 
-//    @Bean
-//    public StringRedisTemplate redisTemplate(LettuceConnectionFactory connectionFactory) {
-//        StringRedisTemplate stringRedisTemplate =  new StringRedisTemplate();
-//        stringRedisTemplate.setConnectionFactory(connectionFactory);
-//        return stringRedisTemplate;
-//    }
+    // @Bean
+    // public StringRedisTemplate redisTemplate(LettuceConnectionFactory
+    // connectionFactory) {
+    // StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
+    // stringRedisTemplate.setConnectionFactory(connectionFactory);
+    // return stringRedisTemplate;
+    // }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {

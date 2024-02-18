@@ -3,19 +3,18 @@ package com.synctech.statter.constant.restful;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.synctech.statter.constant.HttpStatusExtend;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@ApiModel(value = "Standard structure of the response data")
+@Schema(description = "Standard structure of the response data")
 @Data
 public class DataResponse<T extends Object> {
 
-    @ApiModelProperty(name = "code", value = "Response state", notes = "Default 0 means normal, using data field data; when 0, it means abnormal, using the data of the MESSAGE field")
+    @Schema(name = "code", title = "Response state", description = "Default 0 means normal, using data field data; when 0, it means abnormal, using the data of the MESSAGE field")
     int code = 0;
-    @ApiModelProperty(name = "message", value = "Error message")
+    @Schema(name = "message", title = "Error message")
     String message = "";
-    @ApiModelProperty(name = "data", value = "data body")
+    @Schema(name = "data", title = "data body")
     T data = null;
 
     public DataResponse(int code, String message, T data) {

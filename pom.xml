@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.synctech</groupId>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
     <artifactId>statter</artifactId>
     <packaging>pom</packaging>
 
@@ -30,17 +30,16 @@
     </properties>
 
     <modules>
-        <module>component</module>
+        <module>redis</module>
+        <!-- <module>minio</module> -->
         <module>common</module>
         <module>task</module>
         <module>ledger</module>
         <module>manager</module>
         <module>mining-pool</module>
-        <!--<module>administrator</module>-->
-        <!--<module>mockserver</module>-->
     </modules>
 
-    <!--<repositories>
+    <repositories>
         <repository>
             <id>spring-milestone</id>
             <name>Spring milestone</name>
@@ -59,7 +58,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>-->
+    </pluginRepositories>
 
     <dependencies>
         <!-- test -->

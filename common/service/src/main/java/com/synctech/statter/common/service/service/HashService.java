@@ -30,12 +30,13 @@ public class HashService {
      */
     public void update(String sn, long h) {
         Hash t = new Hash().setH(h).setT(System.currentTimeMillis());
+        log.debug("update miner hash: {} = {}", sn, h);
         jedisService.hset(CacheKey.CACHEKEY_HASH_INFO_MINER, sn, t);
     }
 
     public void updateMaxHash(String sn, long maxHistoryHash) {
+        // log.info("updateMaxHash miner hash: {} = {}", sn, maxHistoryHash);
         minerMapper.updateMaxHash(sn, maxHistoryHash);
-        jedisService.hdel(CacheKey.CACHEKEY_INFO_MINER_BY_SN, sn);
     }
 
     /**
@@ -58,6 +59,14 @@ public class HashService {
         return jedisService.hgetAll(CacheKey.CACHEKEY_HASH_INFO_MINER);
     }
 
+    public Map<String, String> getAllWallet() {
+        return jedisService.hgetAll(CacheKey.CACHEKEY_HASH_INFO_WALLET);
+    }
+
+    public Map<String, String> getAllPromotion() {
+        return jedisService.hgetAll(CacheKey.CACHEKEY_HASH_INFO_PROMOTION);
+    }
+
     /**
      * <p>get total hash</p>
      *
@@ -74,8 +83,14 @@ public class HashService {
      */
     public void queryMiner(MinerVo m) {
         Hash hash = get(m.getSn());
-        m.setHash(hash == null ? 0 : hash.getH());
-        m.setOnline(hash.isOnline());
+        if (null == hash) {
+            m.setHash(0);
+            m.setOnline(false);
+            return;
+        }
+        boolean isOnline = hash.isOnline();
+        m.setHash(isOnline ? hash.getH() : 0);
+        m.setOnline(isOnline);
     }
 
 }

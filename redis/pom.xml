@@ -5,45 +5,44 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.synctech</groupId>
-        <artifactId>statter.common</artifactId>
+        <artifactId>statter</artifactId>
         <version>1.1.1</version>
     </parent>
-    <artifactId>statter.common.base</artifactId>
+    <artifactId>statter.component.redis</artifactId>
     <packaging>jar</packaging>
 
     <properties>
-
     </properties>
 
     <dependencies>
-        <!-- base -->
+        <!-- redis -->
         <dependency>
-            <groupId>com.synctech</groupId>
-            <artifactId>statter.common.constant</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.3.1</version>
+            <scope>compile</scope>
         </dependency>
 
-        <!-- db -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.46</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.2.11</version>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.14.1</version>
             <scope>compile</scope>
         </dependency>
 
     </dependencies>
+
 
     <build>
         <resources>
@@ -58,5 +57,6 @@
             </resource>
         </resources>
     </build>
+
 
 </project>

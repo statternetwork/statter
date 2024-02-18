@@ -1,6 +1,6 @@
 package com.synctech.statter.base.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -12,13 +12,13 @@ import java.util.List;
 @Accessors(chain = true)
 public class Page<T extends Serializable> implements Serializable {
 
-    @ApiModelProperty(name = "page", value = "Page number. The first page is 1.")
+    @Schema(name = "page", description = "Page number. The first page is 1.")
     int page;
-    @ApiModelProperty(name = "size", value = "The data size per page, max is 10.")
+    @Schema(name = "size", description = "The data size per page, max is 10.")
     int size;
-    @ApiModelProperty(name = "total", value = "The number of the data matched the conditions.")
+    @Schema(name = "total", description = "The number of the data matched the conditions.")
     int total;
-    @ApiModelProperty(name = "data")
+    @Schema(name = "data")
     List<T> data;
 
     public Page(int page, int size) {

@@ -1,7 +1,7 @@
 package com.synctech.statter.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +18,11 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class CpuModel implements Serializable {
 
-    @ApiModelProperty(name = "cpuModelName", value = "The model of the mining machine's cpu")
+    @Schema(name = "cpuModelName", description = "The model of the mining machine's cpu")
     @JsonProperty("cpuModelName")
     String cpuModelName;
 
-    @ApiModelProperty(name = "standardHash", value = "The standard hash of this cpu")
+    @Schema(name = "standardHash", description = "The standard hash of this cpu")
     @JsonProperty("standardHash")
     long standardHash;
 
