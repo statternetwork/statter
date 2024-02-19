@@ -1,7 +1,7 @@
 package com.synctech.statter.mining.pool.api.controller.v1.ledger.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,19 +14,19 @@ public abstract class PageLedger {
     @Accessors(chain = true)
     public static class Resp {
 
-        @ApiModelProperty(name = "page")
+        @Schema(name = "page")
         @JsonProperty("page")
         int page;
 
-        @ApiModelProperty(name = "size")
+        @Schema(name = "size")
         @JsonProperty("size")
         int size;
 
-        @ApiModelProperty(name = "total", value = "total count belong the promotion")
+        @Schema(name = "total", description = "total count belong the promotion")
         @JsonProperty("total")
         long total;
 
-        @ApiModelProperty(name = "data", value = "the ledger data list")
+        @Schema(name = "data", description = "the ledger data list")
         @JsonProperty("data")
         List<LedgerVo> data = new ArrayList<>();
 

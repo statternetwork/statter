@@ -1,11 +1,10 @@
 package com.synctech.statter.base.entity;
 
-import com.alibaba.fastjson.JSONObject;
-import lombok.Data;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * ledger

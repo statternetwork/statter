@@ -4,13 +4,22 @@ import cn.hutool.core.bean.BeanUtil;
 import com.synctech.statter.base.entity.Miner;
 import com.synctech.statter.base.entity.Promotion;
 import com.synctech.statter.base.entity.Wallet;
+import com.synctech.statter.constant.CacheKey;
 import com.synctech.statter.constant.HttpStatusExtend;
 import com.synctech.statter.constant.restful.DataResponse;
 import com.synctech.statter.mining.pool.api.controller.v1.CommonController;
 import com.synctech.statter.mining.pool.api.controller.v1.promotion.vo.MinerSimpleVo;
+import com.synctech.statter.mining.pool.api.controller.v1.promotion.vo.PromotionInformationVo;
 import com.synctech.statter.mining.pool.api.controller.v1.promotion.vo.PromotionSimpleVo;
 import com.synctech.statter.mining.pool.api.controller.v1.promotion.vo.WalletSimpleVo;
-import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -20,13 +29,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Api(value = "api of the promotion")
-@RequestMapping("v1/prom")
+@Tag(name = "mining pool: promotion")
+@RequestMapping("statter/mining/pool/api/v1/prom")
 @RestController()
 public class PromotionController extends CommonController {
 
-    @ApiOperation(httpMethod = "GET", value = "Obtain a list of miners (wallets) according to the promotion address")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = WalletSimpleVo[].class)})
+    @Operation(method = "GET", description = "get your mine pool information", parameters = @Parameter(name = "sak", description = "the promotion secrect access key", in = ParameterIn.HEADER, schema = @Schema(implementation = String.class), required = true), responses = @ApiResponse(content = @Content(mediaType = "application/json", schema = @Schema(implementation = PromotionInformationVo.class))))
+    @GetMapping("")
+    public String get() {
+        Promotion p = promotionService.get(getPromotionAddress());
+        PromotionInformationVo vo = BeanUtil.toBean(p, PromotionInformationVo.class);
+        vo.setTheoreticalHash(p.getHash());
+        String h = jedisService.hget(CacheKey.CACHEKEY_HASH_INFO_PROMOTION, getPromotionAddress());
+        vo.setRealTimeHash(StringUtils.isBlank(h) ? 0 : Long.valueOf(h));
+        return DataResponse.success(vo);
+    }
+
+    @Operation(method = "GET", description = "Obtain a list of miners (wallets) according to the promotion address", parameters = @Parameter(name = "sak", description = "the promotion secrect access key", in = ParameterIn.HEADER, schema = @Schema(implementation = String.class), required = true), responses = @ApiResponse(content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = WalletSimpleVo.class)))))
     @GetMapping("/wallet/list")
     public String listWallet() {
         List<Wallet> ws = promotionService.listWallet(getPromotionAddress());
@@ -35,21 +54,23 @@ public class PromotionController extends CommonController {
         return DataResponse.success(r);
     }
 
-    @ApiOperation(httpMethod = "GET", value = "Obtain a list of miner machines according to the promotion address")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = MinerSimpleVo[].class)})
+    @Operation(method = "GET", description = "Obtain a list of miner machines according to the promotion address", parameters = @Parameter(name = "sak", description = "the promotion secrect access key", in = ParameterIn.HEADER, schema = @Schema(implementation = String.class), required = true), responses = @ApiResponse(content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MinerSimpleVo.class)))))
     @GetMapping("/miner/list")
     public String listMiner() {
         List<Miner> ms = promotionService.listMiner(getPromotionAddress());
         List<MinerSimpleVo> r = new ArrayList<>();
-        ms.forEach(m -> r.add(BeanUtil.toBean(m, MinerSimpleVo.class)));
+        for (Miner m : ms) {
+            MinerSimpleVo vo = BeanUtil.toBean(m, MinerSimpleVo.class);
+            // log.info("PromotionController#listMiner: {} ------------ {}",
+            // JSONObject.toJSONString(m), JSONObject.toJSONString(vo));
+            r.add(vo);
+        }
         return DataResponse.success(r);
     }
 
-    @ApiOperation(httpMethod = "PUT", value = "change the mine pool description")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK")})
+    @Operation(method = "GET", description = "change the mine pool description", parameters = @Parameter(name = "sak", description = "the promotion secrect access key", in = ParameterIn.HEADER, schema = @Schema(implementation = String.class), required = true), requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "bind wallet address param", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PromotionSimpleVo.class))))
     @PutMapping("")
-    public String updateDescription(@ApiParam(value = "bind wallet address param", type = "json", required = true)
-                                    @RequestBody @Validated PromotionSimpleVo vo) {
+    public String updateDescription(@RequestBody @Validated PromotionSimpleVo vo) {
         if (null == vo || StringUtils.isBlank(vo.getIntroduction())) {
             return DataResponse.fail(HttpStatusExtend.ERROR_INVALID_REQUEST);
         }

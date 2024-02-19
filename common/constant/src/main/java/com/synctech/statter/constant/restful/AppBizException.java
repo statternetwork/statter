@@ -11,6 +11,8 @@ public class AppBizException extends RuntimeException {
 
     String message;
 
+    boolean showStack;
+
     public AppBizException() {
     }
 
@@ -22,6 +24,12 @@ public class AppBizException extends RuntimeException {
     public AppBizException(HttpStatusExtend httpStatusExtend) {
         this.code = httpStatusExtend.value();
         this.message = httpStatusExtend.getReasonPhrase();
+    }
+
+    public AppBizException(HttpStatusExtend httpStatusExtend, boolean showStack) {
+        this.code = httpStatusExtend.value();
+        this.message = httpStatusExtend.getReasonPhrase();
+        this.showStack = showStack;
     }
 
     public AppBizException(HttpStatusExtend httpStatusExtend, String msg) {

@@ -183,4 +183,8 @@ nacos*
 
 statter.*.env
 
+.vscode
 /.fleet/settings.json
+
+
+

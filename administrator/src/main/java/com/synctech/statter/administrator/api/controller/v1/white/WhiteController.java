@@ -12,7 +12,7 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "rule manage")
@@ -20,13 +20,13 @@ import javax.annotation.Resource;
 @RestController("adminWhiteController")
 public class WhiteController {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     RuleService ruleService;
 
-    @Resource
+    @Autowired
     WhiteService whiteService;
 
     @ApiOperation(httpMethod = "PUT", value = "open white list module")
