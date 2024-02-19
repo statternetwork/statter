@@ -12,21 +12,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Slf4j
 @Component("EncryptdCommunicationFileter")
 public class EncryptdCommunicationFileter implements Filter {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     HandlerExceptionResolver handlerExceptionResolver;
 
     @Value("${statter.encrypted-communication.enable}")
@@ -48,19 +47,24 @@ public class EncryptdCommunicationFileter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         log.info("init api filter");
         if (this.encryptdCommunicationEnable) {
-            if (StringUtils.isBlank(this.encryptdCommunicationTokenName) || StringUtils.isBlank(this.encryptdCommunicationTokenPrefixValue) || StringUtils.isBlank(this.encryptdCommunicationTokenPrivateKey)) {
-                throw new ServletException("The encrypt communication module is open, but the token name nor the pk has not been setting correctly.");
+            if (StringUtils.isBlank(this.encryptdCommunicationTokenName)
+                    || StringUtils.isBlank(this.encryptdCommunicationTokenPrefixValue)
+                    || StringUtils.isBlank(this.encryptdCommunicationTokenPrivateKey)) {
+                throw new ServletException(
+                        "The encrypt communication module is open, but the token name nor the pk has not been setting correctly.");
             }
         }
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         if (this.encryptdCommunicationEnable)
             try {
                 process((HttpServletRequest) request, (HttpServletResponse) response);
             } catch (AppBizException e) {
-                handlerExceptionResolver.resolveException((HttpServletRequest) request, (HttpServletResponse) response, null, e);
+                handlerExceptionResolver.resolveException((HttpServletRequest) request, (HttpServletResponse) response,
+                        null, e);
                 return;
             }
         chain.doFilter(request, response);
@@ -68,12 +72,15 @@ public class EncryptdCommunicationFileter implements Filter {
     }
 
     private void process(HttpServletRequest req, HttpServletResponse resp) {
-        if (StringUtils.isNotBlank(this.encryptdCommunicationWhiteTokenName) && StringUtils.isNotBlank(this.encryptdCommunicationWhiteTokenValue)) {
+        if (StringUtils.isNotBlank(this.encryptdCommunicationWhiteTokenName)
+                && StringUtils.isNotBlank(this.encryptdCommunicationWhiteTokenValue)) {
             String whiteToken = req.getHeader(this.encryptdCommunicationWhiteTokenName);
-            if (StringUtils.equals(whiteToken, this.encryptdCommunicationWhiteTokenValue)) return;
+            if (StringUtils.equals(whiteToken, this.encryptdCommunicationWhiteTokenValue))
+                return;
         }
         String t = req.getHeader(this.encryptdCommunicationTokenName);
-        if (StringUtils.isBlank(t)) throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
+        if (StringUtils.isBlank(t))
+            throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         if (null == this.rsa) {
             this.rsa = new RSA(this.encryptdCommunicationTokenPrivateKey, null);
         }
@@ -82,12 +89,15 @@ public class EncryptdCommunicationFileter implements Filter {
         if (!StringUtils.startsWith(s, this.encryptdCommunicationTokenPrefixValue))
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         String suffixStr = StringUtils.substringAfter(s, this.encryptdCommunicationTokenPrefixValue);
-        if (!NumberUtil.isLong(suffixStr)) throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
+        if (!NumberUtil.isLong(suffixStr))
+            throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         long tt = NumberUtil.parseLong(suffixStr);
         long l = System.currentTimeMillis() - tt;
-        if (l > 3600000) // if the timestamp in the client is diff from the server more than one hour, judging as illegal
+        if (l > 3600000) // if the timestamp in the client is diff from the server more than one hour,
+                         // judging as illegal
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
-        else if (System.currentTimeMillis() - tt > 600000) // if the timestamp in the client is diff from the server more than ten m, judging as illegal
+        else if (System.currentTimeMillis() - tt > 600000) // if the timestamp in the client is diff from the server
+                                                           // more than ten m, judging as illegal
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
     }
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "pledge manage")
@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @RestController("adminPledgeController")
 public class PledgeController {
 
-    @Resource
+    @Autowired
     RuleService ruleService;
 
     @ApiOperation(httpMethod = "POST", value = "add rule")

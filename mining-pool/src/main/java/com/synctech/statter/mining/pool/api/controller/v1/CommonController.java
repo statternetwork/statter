@@ -8,16 +8,16 @@ import com.synctech.statter.redis.jedis.JedisService;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class CommonController {
 
-    @Resource
+    @Autowired
     protected JedisService jedisService;
 
-    @Resource
+    @Autowired
     protected PromotionService promotionService;
 
     public HttpServletRequest getRequest() {
@@ -30,7 +30,8 @@ public abstract class CommonController {
 
     protected Promotion getPromotion() {
         Object o = getRequest().getAttribute("PROMOTION");
-        if (null == o) throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
+        if (null == o)
+            throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         return (Promotion) o;
     }
 

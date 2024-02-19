@@ -11,21 +11,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Slf4j
 @Component("AccessKeyFileter")
 public class AccessKeyFileter implements Filter {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     HandlerExceptionResolver handlerExceptionResolver;
 
     @Override
@@ -34,7 +33,8 @@ public class AccessKeyFileter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         try {
@@ -57,7 +57,8 @@ public class AccessKeyFileter implements Filter {
         if (null == p) {
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_INVALID_ACCESS_KEY);
         }
-        JSONObject j = jedisService.hget(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS, p.getAddress(), JSONObject.class);
+        JSONObject j = jedisService.hget(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS, p.getAddress(),
+                JSONObject.class);
         if (j.getLongValue("etl") < System.currentTimeMillis()) {
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_INVALID_ACCESS_KEY);
         }

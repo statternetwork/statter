@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "api about biz rule")
@@ -21,11 +21,11 @@ import javax.annotation.Resource;
 @RestController("openRuleController")
 public class RuleController {
 
-    @Resource
+    @Autowired
     RuleService ruleService;
 
     @ApiOperation(httpMethod = "GET", value = "tax and pledge rules of miners ")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = String.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = String.class) })
     @GetMapping("/miner/tap")
     public String minerTaxAndPledge() {
         JSONObject minerManageRule = new JSONObject();
@@ -37,7 +37,7 @@ public class RuleController {
     }
 
     @ApiOperation(httpMethod = "GET", value = "tax or pledge rules of wallets")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = String.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = String.class) })
     @GetMapping("/wallet/p")
     public String walletPledge() {
         JSONObject minerManageRule = new JSONObject();

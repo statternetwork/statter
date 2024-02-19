@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "api of manage secret key")
@@ -26,23 +26,25 @@ import javax.annotation.Resource;
 @RestController()
 public class SecretKeyController extends CommonController {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     PromotionService promotionService;
 
     @ApiOperation(httpMethod = "POST", value = "Refresh secret key by the management key.")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = String.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = String.class) })
     @PostMapping("refresh")
     public String refresh(@ApiParam(type = "json", required = true) @RequestBody RefreshSecretKey.Req req) {
         if (null == req || StringUtils.isBlank(req.getA()) || StringUtils.isBlank(req.getMk()))
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         Promotion p = jedisService.hget(CacheKey.CACHEKEY_INFO_PROMOTION_BY_ADDRESS, req.getA(), Promotion.class);
-        if (null == p) throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
+        if (null == p)
+            throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         if (!StringUtils.equals(p.getManagementKey(), req.getMk())) {
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
-        } else if (StringUtils.isNotBlank(p.getSecretKey()) && (System.currentTimeMillis() - p.getSecretKeyUptTime().getTime() < 86400000)) {
+        } else if (StringUtils.isNotBlank(p.getSecretKey())
+                && (System.currentTimeMillis() - p.getSecretKeyUptTime().getTime() < 86400000)) {
             return DataResponse.success(p.getSecretKey());
         }
         promotionService.refreshSecretKey(req.getA());

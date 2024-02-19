@@ -7,21 +7,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Slf4j
 @Component("ApiCountFileter")
 public class ApiCountFileter implements Filter {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     HandlerExceptionResolver handlerExceptionResolver;
 
     @Override
@@ -30,7 +29,8 @@ public class ApiCountFileter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         log.info("do api count filter");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
@@ -38,7 +38,7 @@ public class ApiCountFileter implements Filter {
             process(req, resp);
             chain.doFilter(request, response);
         } catch (AppBizException e) {
-            resp.setHeader("Content-Type","text/plain;charset=UTF-8");
+            resp.setHeader("Content-Type", "text/plain;charset=UTF-8");
             handlerExceptionResolver.resolveException(req, resp, null, e);
         }
     }

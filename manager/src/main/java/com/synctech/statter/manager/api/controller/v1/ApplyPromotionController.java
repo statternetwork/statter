@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "api about pool for dapp")
@@ -21,20 +21,20 @@ import javax.annotation.Resource;
 @RestController("applyPromotionController")
 public class ApplyPromotionController {
 
-    @Resource
+    @Autowired
     ApplyForPromotionMapper applyForPromotionMapper;
 
-    @Resource
+    @Autowired
     WalletService walletService;
 
-    @Resource
+    @Autowired
     PromotionService promotionService;
 
     @ApiOperation(httpMethod = "GET", value = "get the apply for upgrading to a promotion")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = ApplyForPromotion.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = ApplyForPromotion.class) })
     @GetMapping("/{address}")
-    public String get(@ApiParam(name = "address", value = "wallet address", type = "String", required = true)
-                      @PathVariable("address") String address) {
+    public String get(
+            @ApiParam(name = "address", value = "wallet address", type = "String", required = true) @PathVariable("address") String address) {
         if (StringUtils.isBlank(address)) {
             return DataResponse.fail(HttpStatusExtend.ERROR_INVALID_REQUEST);
         }
@@ -46,10 +46,10 @@ public class ApplyPromotionController {
     }
 
     @ApiOperation(httpMethod = "POST", value = "commit the apply for upgrading to a promotion")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = String.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = String.class) })
     @PostMapping("")
-    public String apply(@ApiParam(name = "params", type = "ApplyForPromotion", required = true)
-                        @RequestBody() ApplyForPromotion body) {
+    public String apply(
+            @ApiParam(name = "params", type = "ApplyForPromotion", required = true) @RequestBody() ApplyForPromotion body) {
         if (null == body || StringUtils.isBlank(body.getAddress()) || StringUtils.isBlank(body.getAlias())) {
             return DataResponse.fail(HttpStatusExtend.ERROR_INVALID_REQUEST);
         }
@@ -63,10 +63,10 @@ public class ApplyPromotionController {
     }
 
     @ApiOperation(httpMethod = "PUT", value = "edit the apply for upgrading to a promotion")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = String.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = String.class) })
     @PutMapping("")
-    public String edit(@ApiParam(name = "params", type = "ApplyForPromotion", required = true)
-                       @RequestBody() ApplyForPromotion body) {
+    public String edit(
+            @ApiParam(name = "params", type = "ApplyForPromotion", required = true) @RequestBody() ApplyForPromotion body) {
         if (null == body || StringUtils.isBlank(body.getAddress()) || StringUtils.isBlank(body.getAlias())) {
             return DataResponse.fail(HttpStatusExtend.ERROR_INVALID_REQUEST);
         }
@@ -77,8 +77,10 @@ public class ApplyPromotionController {
             return DataResponse.fail(new AppBizException(HttpStatusExtend.ERROR_WALLET_APPLY_FOR_PROMOTION_EXIST));
         else if (ApplyForPromotion.Status.PASS.compare(applyForPromotion.getStatus()))
             return DataResponse.fail(HttpStatusExtend.ERROR_INVALID_REQUEST);
-        if (StringUtils.isNotBlank(body.getAlias())) applyForPromotion.setAlias(body.getAlias());
-        if (StringUtils.isNotBlank(body.getIntroduction())) applyForPromotion.setIntroduction(body.getIntroduction());
+        if (StringUtils.isNotBlank(body.getAlias()))
+            applyForPromotion.setAlias(body.getAlias());
+        if (StringUtils.isNotBlank(body.getIntroduction()))
+            applyForPromotion.setIntroduction(body.getIntroduction());
         applyForPromotionMapper.updateInfo(body);
         return DataResponse.success();
     }

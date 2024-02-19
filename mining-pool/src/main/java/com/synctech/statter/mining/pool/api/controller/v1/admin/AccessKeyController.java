@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 
 @Slf4j
@@ -29,31 +29,37 @@ import java.util.Date;
 @RestController()
 public class AccessKeyController extends CommonController {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
     @Value("${statter.promotion.ak.expire.ms:86400000}")
     private Long akExpireMillionSecond;
 
-    @ApiOperation(httpMethod = "POST", value = "Obtain a new access key which is used for ask other pool api interface, " +
-            "the ak will be expired after 2 hours.if the expire time is less than 30 minutes, you can refresh it again." +
+    @ApiOperation(httpMethod = "POST", value = "Obtain a new access key which is used for ask other pool api interface, "
+            +
+            "the ak will be expired after 2 hours.if the expire time is less than 30 minutes, you can refresh it again."
+            +
             "if malicious refresh ak outside the rules, the ak and the promotion will be frozen several days.")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = GetAccessKey.Resp.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = GetAccessKey.Resp.class) })
     @PostMapping("refresh")
     public String refresh(@ApiParam(type = "json", required = true) @RequestBody GetAccessKey.Req req) {
         if (null == req || StringUtils.isBlank(req.getA()) || StringUtils.isBlank(req.getSk()))
             throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
-        JSONObject info = jedisService.hget(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS, req.getA(), JSONObject.class);// check refresh time
+        JSONObject info = jedisService.hget(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS, req.getA(),
+                JSONObject.class);// check refresh time
         if (null != info) {
             if (info.getIntValue("c") > 24) {// malicious refresh time is greater than 24, it will freeze the promotion
                 throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_PROMOTION_IS_FROZEN);
-//            } else if (System.currentTimeMillis() - info.getLongValue("et") > -1800000) {
-//                info.put("c", info.getIntValue("c") + 1);
-//                jedisService.hset(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS, req.getA(), info.toJSONString());
-//                throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_MALICIOUS_REFRESH_AK);
+                // } else if (System.currentTimeMillis() - info.getLongValue("et") > -1800000) {
+                // info.put("c", info.getIntValue("c") + 1);
+                // jedisService.hset(CacheKey.CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS,
+                // req.getA(), info.toJSONString());
+                // throw new
+                // AppBizException(HttpStatusExtend.ERROR_POOL_API_MALICIOUS_REFRESH_AK);
             }
         }
         Promotion p = jedisService.hget(CacheKey.CACHEKEY_INFO_PROMOTION_BY_ADDRESS, req.getA(), Promotion.class);
-        if (null == p) throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
+        if (null == p)
+            throw new AppBizException(HttpStatusExtend.ERROR_INVALID_REQUEST);
         else if (!StringUtils.equals(req.getSk(), p.getSecretKey()))
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_WRONG_SECRET_KEY);
         String newToken = req.getA() + System.currentTimeMillis() + RandomUtil.randomString(32) + req.getSk();
@@ -72,6 +78,5 @@ public class AccessKeyController extends CommonController {
         getResponse().setHeader("sak", newToken);
         return DataResponse.success(info.toJavaObject(GetAccessKey.Resp.class));
     }
-
 
 }

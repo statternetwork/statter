@@ -4,14 +4,15 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 public class FileterConfiguration {
 
-    @Resource
+    @Autowired
     @Bean("FilterRegistrationBeanEncryptdCommunicationFileter")
-    public FilterRegistrationBean<EncryptdCommunicationFileter> registeAccessKeyFileter(EncryptdCommunicationFileter f) {
+    public FilterRegistrationBean<EncryptdCommunicationFileter> registeAccessKeyFileter(
+            EncryptdCommunicationFileter f) {
         FilterRegistrationBean<EncryptdCommunicationFileter> reg = new FilterRegistrationBean();
         reg.setFilter(f);
         reg.addUrlPatterns("/v1/*");
@@ -20,6 +21,5 @@ public class FileterConfiguration {
         return reg;
 
     }
-
 
 }

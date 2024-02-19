@@ -15,26 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Component
 @Slf4j
 public class BlockCrawlerJobs {
 
-    @Resource
+    @Autowired
     LedgerMapper ledgerMapper;
 
-    @Resource
+    @Autowired
     BlockCrawlerMapper blockCrawlerMapper;
 
-    @Resource
+    @Autowired
     TradeFlowMapper tradeFlowMapper;
 
-    @Resource
+    @Autowired
     BlockCrawlerService blockCrawlerService;
 
-    @Resource
+    @Autowired
     PoolService poolService;
 
     /**
@@ -49,7 +49,8 @@ public class BlockCrawlerJobs {
         Long bbi = blockCrawlerMapper.max();
         long nbi = null == bbi ? 1 : (bbi + 1);
         long cbi = poolService.getBlockIndexImpl();
-        if (nbi >= cbi) {// If the 'nbi' is greater than equal to the current height of the mining pool block, then it ends
+        if (nbi >= cbi) {// If the 'nbi' is greater than equal to the current height of the mining pool
+                         // block, then it ends
             return;
         }
         try {

@@ -4,19 +4,19 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 public class FileterConfiguration {
 
-    static String[] patterns = new String[]{
+    static String[] patterns = new String[] {
             "/v1/prom/*",
             "/v1/miner/*",
             "/v1/ledger/*",
             "/v1/wallet/list/*",
     };
 
-    @Resource
+    @Autowired
     @Bean("FilterRegistrationBeanAccessKeyFileter")
     public FilterRegistrationBean<AccessKeyFileter> registeAccessKeyFileter(AccessKeyFileter f) {
         FilterRegistrationBean<AccessKeyFileter> reg = new FilterRegistrationBean();
@@ -27,7 +27,7 @@ public class FileterConfiguration {
         return reg;
     }
 
-    @Resource
+    @Autowired
     @Bean("FilterRegistrationBeanApiCountFileter")
     public FilterRegistrationBean<ApiCountFileter> registeApiCountFileter(ApiCountFileter f) {
         FilterRegistrationBean<ApiCountFileter> reg = new FilterRegistrationBean();
@@ -37,6 +37,5 @@ public class FileterConfiguration {
         reg.setAsyncSupported(true);
         return reg;
     }
-
 
 }

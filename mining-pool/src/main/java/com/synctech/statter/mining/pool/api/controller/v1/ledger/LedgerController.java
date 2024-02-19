@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,27 +35,30 @@ import java.util.stream.Collectors;
 @RestController()
 public class LedgerController extends CommonController {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     PromotionLedgerMapper promotionLedgerMapper;
 
     @ApiOperation(httpMethod = "GET", value = "")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = LedgerVo.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = LedgerVo.class) })
     @GetMapping("/last")
     public String last() {
-        if (1 != promotionLedgerMapper.existTable(getPromotionAddress())) return "";// exist no table
+        if (1 != promotionLedgerMapper.existTable(getPromotionAddress()))
+            return "";// exist no table
         List<Ledger> ledgerList = promotionLedgerMapper.findLimit(getPromotionAddress(), 1);
-        if (CollectionUtils.isEmpty(ledgerList)) return "";
+        if (CollectionUtils.isEmpty(ledgerList))
+            return "";
         return DataResponse.success(ledger2Vo(ledgerList.get(0)));
     }
 
     @ApiOperation(httpMethod = "GET", value = "Query the ledger with the specifying the blockindex")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = LedgerVo.class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = LedgerVo.class) })
     @GetMapping("/get/{bi}")
     public String get(@ApiParam(value = "block index", type = "long", required = true) @PathVariable("bi") long bi) {
-        if (1 != promotionLedgerMapper.existTable(getPromotionAddress())) return DataResponse.success();// exist no table
+        if (1 != promotionLedgerMapper.existTable(getPromotionAddress()))
+            return DataResponse.success();// exist no table
         Promotion p = super.getPromotion();
         if (bi < 0) {
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_WRONG_BLOCKINDEX_QUERY_LEDGER);
@@ -75,10 +78,11 @@ public class LedgerController extends CommonController {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "Query the latest one thousand ledgers")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = LedgerVo[].class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = LedgerVo[].class) })
     @GetMapping("/last/thousand")
     public String promotionLastThousand() {
-        if (1 != promotionLedgerMapper.existTable(getPromotionAddress())) return DataResponse.success(new ArrayList<>());// exist no table
+        if (1 != promotionLedgerMapper.existTable(getPromotionAddress()))
+            return DataResponse.success(new ArrayList<>());// exist no table
         StopWatch sw = new StopWatch("promotionLastThousand");
         sw.start("get promotion ledger list cache");
         String v = jedisService.hget(CacheKey.CACHEKEY_LEDGER_LIST_BY_PROMOTION, getPromotionAddress());
@@ -100,10 +104,13 @@ public class LedgerController extends CommonController {
     }
 
     @ApiOperation(httpMethod = "GET", value = "Query the ledger with the specifying the blockindex area, the discrepancy between ei-si must be less than 1000 ")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = LedgerVo[].class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = LedgerVo[].class) })
     @GetMapping("/list/{si}/{ei}")
-    public String listByArea(@ApiParam(value = "wallet address", type = "long", required = true) @PathVariable("si") long si, @ApiParam(value = "wallet address", type = "long", required = true) @PathVariable("ei") long ei) {
-        if (1 != promotionLedgerMapper.existTable(getPromotionAddress())) return DataResponse.success(new ArrayList<>());// exist no table
+    public String listByArea(
+            @ApiParam(value = "wallet address", type = "long", required = true) @PathVariable("si") long si,
+            @ApiParam(value = "wallet address", type = "long", required = true) @PathVariable("ei") long ei) {
+        if (1 != promotionLedgerMapper.existTable(getPromotionAddress()))
+            return DataResponse.success(new ArrayList<>());// exist no table
         Promotion p = super.getPromotion();
         if (si < 0 || ei < si || ei - si > 1000) {
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_WRONG_BLOCKINDEX_QUERY_LEDGER);
@@ -121,19 +128,23 @@ public class LedgerController extends CommonController {
     }
 
     @ApiOperation(httpMethod = "GET", value = "Page query the ledger, order by the block index with 'ASC'")
-    @ApiResponses({@ApiResponse(code = 200, message = "OK", response = LedgerVo[].class)})
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK", response = LedgerVo[].class) })
     @GetMapping("/page/{page}/{size}")
-    public String page(@ApiParam(value = "page num, the start is 1.", type = "int", required = true) @PathVariable("page") int page,
-                       @ApiParam(value = "page size, max 100.", type = "int", required = true) @PathVariable("size") int size) {
+    public String page(
+            @ApiParam(value = "page num, the start is 1.", type = "int", required = true) @PathVariable("page") int page,
+            @ApiParam(value = "page size, max 100.", type = "int", required = true) @PathVariable("size") int size) {
         StopWatch w = new StopWatch("page query ledger");
-        if (page < 1 || size > 100) throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_INVALID_PAGE_NUM_OR_SIZE);
+        if (page < 1 || size > 100)
+            throw new AppBizException(HttpStatusExtend.ERROR_POOL_API_INVALID_PAGE_NUM_OR_SIZE);
         PageLedger.Resp r = new PageLedger.Resp().setPage(page).setSize(size);
-        if (1 != promotionLedgerMapper.existTable(getPromotionAddress())) return DataResponse.success(r);// exist no table
+        if (1 != promotionLedgerMapper.existTable(getPromotionAddress()))
+            return DataResponse.success(r);// exist no table
         w.start("count total");
         long total = promotionLedgerMapper.count(getPromotionAddress());
         w.stop();
         r.setTotal(total);
-        if (total == 0) return DataResponse.success(r);
+        if (total == 0)
+            return DataResponse.success(r);
         long si = (page - 1) * size;
         long ei = page * size;
         w.start("query data");
@@ -153,6 +164,5 @@ public class LedgerController extends CommonController {
                 .setData(new JSONObject(l.getData())); // the compute count ledger of this block
         return vo;
     }
-
 
 }

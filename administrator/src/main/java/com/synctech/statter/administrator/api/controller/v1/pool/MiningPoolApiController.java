@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Api(value = "api limit manage")
@@ -21,10 +21,10 @@ import javax.annotation.Resource;
 @RestController("adminMiningPoolApiController")
 public class MiningPoolApiController {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     ApiLimitMapper apiLimitMapper;
 
     @ApiOperation(httpMethod = "POST", value = "add limit rule")
