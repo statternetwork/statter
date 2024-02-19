@@ -7,10 +7,6 @@ public abstract class CacheKey {
     /**
      *
      */
-    public static final String CACHEKEY_INFO_MINER_SN_MAP = "CACHEKEY_INFO_MINER_SN_MAP";
-    /**
-     *
-     */
     public static final String CACHEKEY_INFO_CPU_MODEL = "CACHEKEY_INFO_CPU_MODEL";
     /**
      * <p>the key:miner info by sn</p>
@@ -18,7 +14,9 @@ public abstract class CacheKey {
      * <p>cache type:hash. the field is miner SN, the value is the miner info</p>
      */
     public static final String CACHEKEY_INFO_MINER_BY_SN = "CACHEKEY_INFO_MINER_BY_SN",
-            CACHEKEY_INFO_MINER_BY_SN_LOCK = "CACHEKEY_INFO_MINER_BY_SN_LOCK";
+            CACHEKEY_INFO_MINER_BY_SN_LOCK = "CACHEKEY_INFO_MINER_BY_SN_LOCK",
+            CACHEKEY_LIST_MINERS_BY_WALLET_ADDRES = "CACHEKEY_LIST_MINERS_BY_WALLET_ADDRES",
+            CACHEKEY_LIST_MINERS_BY_WALLET_ADDRES_LOCK = "CACHEKEY_LIST_MINERS_BY_WALLET_ADDRES_LOCK";
     /**
      * <p>the key:wallet info by address</p>
      * <p>the lock:wallet info by address</p>
@@ -37,19 +35,12 @@ public abstract class CacheKey {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // mining
     /**
-     * <p>the key:the global block index height</p>
-     * <p>the lock:the global block index height</p>
-     * <p>cache type:String,the value is the block index</p>
-     */
-    public static final String CACHEKEY_MINING_BLOCK_INDEX = "CACHEKEY_MINING_BLOCK_INDEX";
-    /**
      * <p>the key prefix:the block task</p>
      * <p>the lock:block task</p>
      * <p>cache type:hash,the suffix of the key is the block index,the field is the wallet address,
      * the value is the task in this block index</p>
      */
-    public static final String CACHEKEY_MINING_QUESTION_KEY_PREFIX = "CACHEKEY_MINING_QUESTION_KEY_PREFIX",
-            CACHEKEY_MINING_QUESTION_LOCK = "CACHEKEY_MINING_QUESTION_LOCK";
+    public static final String CACHEKEY_MINING_QUESTION = "CACHEKEY_MINING_QUESTION";
     /**
      * <p>the key prefix:the ledger on the block index</p>
      * <p>the lock:the ledger on the block index</p>
@@ -110,12 +101,12 @@ public abstract class CacheKey {
      * <p>cache type:hash,the field is the promotion address,the value is the ak refresh count and timestamp</p>
      * value : {'c':1, 'ct':111, 'etc':111}
      */
-    public static final String CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS = "CACHEKEY_AK_PROMOTION_REFRESH_BY_ADDRESS";
+    public static final String CACHEKEY_AK_ASK_INFO = "CACHEKEY_AK_ASK_INFO";
     /**
      * <p>the key:promotion ak</p>
-     * <p>cache type:hash,the field is the promotion access token,the value is the promotion info</p>
+     * <p>cache type:hash,the field is the promotion access token,the value is "expireTime::promotionAddress"</p>
      */
-    public static final String CACHEKEY_AK_PROMOTION_BY_AK = "CACHEKEY_AK_PROMOTION_BY_AK";
+    public static final String CACHEKEY_AK = "CACHEKEY_AK";
 
     /**
      * <p>the key:promotion addr</p>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.synctech</groupId>
@@ -99,13 +99,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <scope>compile</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.0.7.RELEASE</version>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
@@ -118,13 +112,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <!--<scope>compile</scope>-->
         </dependency>
 
         <dependency>
@@ -137,30 +124,6 @@
             <artifactId>shedlock-provider-redis-jedis</artifactId>
             <version>4.39.0</version>
         </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.1.0</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- swagger -->
-        <!--<dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.13</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
-        </dependency>-->
 
     </dependencies>
 
@@ -216,7 +179,7 @@
                 <version>2.6.0</version>
                 <configuration>
                     <from>
-                        <image>${image.repo.prefix}/openjdk:8u322-jdk-buster</image>
+                        <image>${image.repo.prefix}/${image.basic}</image>
                         <auth>
                             <username>${image.repo.auth.username}</username>
                             <password>${image.repo.auth.password}</password>
@@ -226,6 +189,7 @@
                         <image>${image.repo.prefix}/${project.artifactId}</image>
                         <tags>
                             <tag>latest</tag>
+                            <tag>${maven.build.timestamp}</tag>
                         </tags>
                         <auth>
                             <username>${image.repo.auth.username}</username>
@@ -237,14 +201,14 @@
                         <mainClass>${main.class}</mainClass>
                     </container>
                 </configuration>
-                <executions>
+                <!-- <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
 
         </plugins>

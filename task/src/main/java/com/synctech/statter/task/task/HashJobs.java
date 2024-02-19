@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import redis.clients.jedis.Jedis;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Map;
 
@@ -30,22 +30,22 @@ import java.util.Map;
 @Slf4j
 public class HashJobs {
 
-
     @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     HashService hashService;
 
-    @Resource
+    @Autowired
     MinerMapper minerMapper;
 
-    @Resource
+    @Autowired
     WalletMapper walletMapper;
 
     /**
      * Timing task:
-     * - Analysis of computing power information (mineral computing power, mining pool computing power)
+     * - Analysis of computing power information (mineral computing power, mining
+     * pool computing power)
      */
     @Scheduled(fixedDelay = 60000)
     @SchedulerLock(name = "analyzeHashRate", lockAtLeastFor = 100, lockAtMostFor = 60000)
@@ -55,8 +55,10 @@ public class HashJobs {
         try {
             String ct = j.get(CacheKey.CACHEKEY_HASH_INFO_GLOBAL_CACHE_TIME);
             long ctl = 0;
-            if (!StringUtils.isBlank(ct)) ctl = NumberUtil.parseLong(ct);
-            if ((System.currentTimeMillis() - ctl) < 60000) {// The computing power update time is less than one minute, skip
+            if (!StringUtils.isBlank(ct))
+                ctl = NumberUtil.parseLong(ct);
+            if ((System.currentTimeMillis() - ctl) < 60000) {// The computing power update time is less than one minute,
+                                                             // skip
                 return;
             }
             analyzeHashRateImpl(j);
@@ -87,11 +89,14 @@ public class HashJobs {
         j.del(CacheKey.CACHEKEY_HASH_INFO_WALLET);
         for (Miner m : ms) {
             long h = 0;
-            if (StringUtils.isBlank(m.getWalletAddress())) continue;
+            if (StringUtils.isBlank(m.getWalletAddress()))
+                continue;
             String v1 = j.hget(CacheKey.CACHEKEY_HASH_INFO_WALLET, m.getWalletAddress());// the key is wallet address
-            if (!StringUtils.isBlank(v1)) h = NumberUtil.parseLong(v1);
+            if (!StringUtils.isBlank(v1))
+                h = NumberUtil.parseLong(v1);
             String v2 = all.get(m.getSn());
-            if (StringUtils.isBlank(v2)) continue;
+            if (StringUtils.isBlank(v2))
+                continue;
             Hash hash = JSONObject.parseObject(v2, Hash.class);
             if ((System.currentTimeMillis() - hash.getT()) > 120000) {// expired data
                 j.hdel(CacheKey.CACHEKEY_HASH_INFO_MINER, m.getSn());
@@ -104,12 +109,16 @@ public class HashJobs {
         j.del(CacheKey.CACHEKEY_HASH_INFO_PROMOTION);
         Map<String, String> whs = j.hgetAll(CacheKey.CACHEKEY_HASH_INFO_WALLET);// the key is wallet address
         for (Wallet w : ws) {
-            if (StringUtils.isBlank(w.getPromotionAddress())) continue;
+            if (StringUtils.isBlank(w.getPromotionAddress()))
+                continue;
             long h = 0;
-            String v1 = j.hget(CacheKey.CACHEKEY_HASH_INFO_PROMOTION, w.getPromotionAddress());// the key is promotion address
-            if (!StringUtils.isBlank(v1)) h = NumberUtil.parseLong(v1);
+            String v1 = j.hget(CacheKey.CACHEKEY_HASH_INFO_PROMOTION, w.getPromotionAddress());// the key is promotion
+                                                                                               // address
+            if (!StringUtils.isBlank(v1))
+                h = NumberUtil.parseLong(v1);
             String v2 = whs.get(w.getAddress());
-            if (StringUtils.isBlank(v2)) continue;
+            if (StringUtils.isBlank(v2))
+                continue;
             h += NumberUtil.parseLong(v2);
             j.hset(CacheKey.CACHEKEY_HASH_INFO_PROMOTION, w.getPromotionAddress(), h + "");
         }
@@ -123,6 +132,4 @@ public class HashJobs {
         j.set(CacheKey.CACHEKEY_HASH_INFO_GLOBAL_CACHE_TIME, System.currentTimeMillis() + "");// refresh update time
     }
 
-
 }
-

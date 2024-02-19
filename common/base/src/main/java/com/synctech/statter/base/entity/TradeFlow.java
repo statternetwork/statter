@@ -77,11 +77,11 @@ public class TradeFlow implements Serializable {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * ???????????????
+     *
      */
     String contractNumber;
     /**
-     * ?????????????
+     *
      */
     String machineCode;
 
@@ -97,6 +97,10 @@ public class TradeFlow implements Serializable {
      * @see Stage
      */
     byte stage;
+    /**
+     * Process error record
+     */
+    String errMsg;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override

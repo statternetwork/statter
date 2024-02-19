@@ -1,7 +1,7 @@
 package com.synctech.statter.base.entity;
 
 import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,13 +27,13 @@ public class ApplyForPromotion implements Serializable {
     /**
      * @see Wallet#address
      */
-    @ApiModelProperty(name = "address", value = "The income wallet address of the mining pool, defaults to the length " + WALLET_ADDRESS_LENGTH + ", the extensive string that has begun at the beginning of ST")
+    @Schema(name = "address", description = "The income wallet address of the mining pool, defaults to the length " + WALLET_ADDRESS_LENGTH + ", the extensive string that has begun at the beginning of ST")
     String address;
 
-    @ApiModelProperty(name = "alias", value = "alias name")
+    @Schema(name = "alias", description = "alias name")
     String alias;
 
-    @ApiModelProperty(name = "introduction", value = "The introduction about promotion")
+    @Schema(name = "introduction", description = "The introduction about promotion")
     String introduction;
 
     @Override

@@ -11,32 +11,32 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
 @Service
 public class TradeFlowService {
 
-    @Resource
+    @Autowired
     MinerMapper minerMapper;
 
-    @Resource
+    @Autowired
     WalletMapper walletMapper;
 
-    @Resource
+    @Autowired
     PromotionService promotionService;
 
-    @Resource
+    @Autowired
     ProcessMapper processMapper;
 
-    @Resource
+    @Autowired
     ApplyForPromotionMapper applyForPromotionMapper;
 
-    @Resource
+    @Autowired
     TradeFlowMapper tradeFlowMapper;
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
     public void successFlow(TradeFlow f) {
@@ -93,7 +93,8 @@ public class TradeFlowService {
     @Transactional
     public void minerTax(TradeFlow f) {
         Miner m = this.mineCheck(f, true, false);
-        if (null == m) return;
+        if (null == m)
+            return;
         Process p = new Process();
         p.setType(Process.Type.MinerTax.getValue())
                 .setStage(Process.Stage.TaxComplete.getValue())
@@ -117,7 +118,8 @@ public class TradeFlowService {
     @Transactional
     public void minerPledge(TradeFlow f) {
         Miner m = this.mineCheck(f, false, true);
-        if (null == m) return;
+        if (null == m)
+            return;
         Process p = new Process();
         p.setType(Process.Type.MinerPledge.getValue())
                 .setStage(Process.Stage.PledgeComplete.getValue())
@@ -141,7 +143,8 @@ public class TradeFlowService {
     @Transactional
     public void minerRedempt(TradeFlow f) {
         Miner m = this.mineCheck(f, false, false);
-        if (null == m) return;
+        if (null == m)
+            return;
         Process p = new Process();
         p.setType(Process.Type.MinerRedemption.getValue())
                 .setStage(Process.Stage.RedemptionComplete.getValue())
@@ -187,7 +190,8 @@ public class TradeFlowService {
         w.setHasPledged(true);
         w.setPromotionAddress(w.getAddress());
         walletMapper.update(w);// Update the wallet to the pledge and add it to your own mining pool
-        // Wallet pledge has specific meanings, and needs to be extended additional business content,
+        // Wallet pledge has specific meanings, and needs to be extended additional
+        // business content,
         // such as establishing a mining pool, developing API, etc.
         ApplyForPromotion apply = applyForPromotionMapper.find(wa);
         applyForPromotionMapper.updateStatus(wa, ApplyForPromotion.Status.PASS.get());
@@ -204,6 +208,5 @@ public class TradeFlowService {
         }
         this.successFlow(f);
     }
-
 
 }

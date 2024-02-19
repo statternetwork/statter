@@ -124,20 +124,25 @@ public enum HttpStatusExtend {
     ERROR_POOL_COMMIT_RESULT(10006, "Gateway error: error occurs when the calculation result is submitted to the gateway"),
     ERROR_POOL_DOWNLOAD_BLOCK(10007, "Gateway error: wrong block content"),
     ERROR_POOL_DOWNLOAD_BLOCK_EMPTY(10008, "Gateway error: block content is empty"),
-    ERROR_POOL_GET_POOL_TASK_NOT_MATCH_BLOCK_INDEX(10008, "Gateway error: the block height is different between the task and the block height"),
+    ERROR_POOL_GET_POOL_TASK_NOT_MATCH_BLOCK_INDEX(10009, "Gateway error: the block height is different between the task and the block height"),
+    ERROR_POOL_GET_POOL_TASK_EMPTY(10010, "Gateway error: the pool task is empty"),
+    ERROR_POOL_COMMIT_RESULT_EXPIRE_BLOCKINDEX(10011, "Gateway error: block index is expired"),
 
     // --- 21xxx miner manage  ---
-    ERROR_MINER_NOT_FOUND(20001, "Miner manage error: miner not found"),
+    ERROR_MINER_NOT_FOUND(20001, "Miner manage error: miner not found: sn = {}"),
     ERROR_WALLET_INVALID_ADDRESS(20002, "Miner manage error: wrong wallet address"),
     ERROR_PROMOTION_NOT_FOUND(20003, "Miner manage error: promotion not found"),
     ERROR_MINER_HAS_BIND_WALLET(20004, "Miner manage error: miner has bind wallet"),
     ERROR_MINER_BIND_WALLET_PROMOTION_ADDRESS_NOT_MATCH(20005, "Miner manage error: cannot change promotion"),
+    ERROR_MINER_SN_CODE(20006, "Miner manage error: invalid sn code"),
+    ERROR_MINER_UNREGISTERED_MACHINE(20007, "Miner manage error: unregistered machine"),
     ERROR_MINER_BIND_WALLET_PROMOTION_ADDRESS_IS_BLANK(20015, "Miner manage error: wallet has not select promotion"),
     ERROR_MINER_UNBIND_WALLET(20006, "Miner manage error: error when miner unbind wallet"),
     ERROR_WALLET_SELECTED_PROMOTION_EXIST(20007, "Wallet manage error: miner has binded wallet, you cannot choose again"),
     ERROR_WALLET_SELECTED_PROMOTION_MINER_EXIST_PROMOTION(20008, "Wallet manage error: the promotion of your miner under you wallet is different with the promotion you select "),
     ERROR_WALLET_APPLY_FOR_PROMOTION_NOT_FOUND(21001, "Wallet mange error: the apply for promotion is none"),
     ERROR_WALLET_APPLY_FOR_PROMOTION_EXIST(21002, "Wallet mange error: the apply for promotion is existed"),
+    ERROR_WALLET_ALIAS_FOR_PROMOTION_EXIST(21003, "Wallet mange error: the alias for promotion is existed"),
 //    ERROR_MINER_TAX_HAS_TAXED(20009, "Miner manage error: has taxed"),
 //    ERROR_MINER_TAX_NOT_COMPLETE(20010, "Miner manage error: the progress of miner tax has not completed,cannot apply again"),
 //    ERROR_MINER_PLEDGE_HAS_PLEDGED(20011, "Miner manage error: has pledged"),
@@ -157,6 +162,7 @@ public enum HttpStatusExtend {
     ERROR_MINING_LEDGER_NOT_FOUND(30007, "Mining error: the ledge not found"),
     ERROR_MINING_MINER_CANNOT_MINING(30008, "Mining error: the miner does not meet the mining conditions"),
     ERROR_MINING_MINER_VERSION_EXPIRED(30008, "Mining error: the version of the miner is expired"),
+    ERROR_MINING_LEDGER_SN_QUANTITY_NOT_ENOUGH(30009, "Mining error: the quantity of the ledger sn is not enough"),
 
     // --- 4xxxx pool api   ---
     ERROR_POOL_API_SECRET_KEY_REFRESH_ONCE_IN_24_HOURS(40001, "Secret key can only be refreshed once in 24 hours"),
@@ -168,6 +174,9 @@ public enum HttpStatusExtend {
     ERROR_POOL_API_BLOCKINDEX_IS_CURRENT(40007, "the blockindex is in production"),
     ERROR_POOL_API_BLOCK_NOT_BELONG_PROMOTION(40008, "the block is not belong the promotion"),
     ERROR_POOL_API_INVALID_PAGE_NUM_OR_SIZE(40009, "Invalid page num or size"),
+    ERROR_POOL_API_THE_BLOCK_IS_IN_PRODUCT(40010, "the block is in producing"),
+    ERROR_POOL_API_ACCESS_KEY_EXPIRED(40011, "The ak is expired"),
+    ERROR_POOL_API_EMPTY_ACCESS_KEY(40012, "Empty ak"),
 
     // --- 7xxxx administrator ---
     ERROR_RULE_NOT_FOUND(70001, "Admin error:the biz rule not found"),

@@ -1,7 +1,7 @@
 package com.synctech.statter.mining.pool.api.controller.v1.admin.vo;
 
 import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +19,9 @@ public abstract class GetAccessKey {
     @Accessors(chain = true)
     public static class Req {
 
-        @ApiModelProperty("pool address")
+        @Schema(name = "pool address")
         String a;
-        @ApiModelProperty("api access secret key")
+        @Schema(name = "api access secret key")
         String sk;
 
         @Override
@@ -37,18 +37,18 @@ public abstract class GetAccessKey {
     @Accessors(chain = true)
     public static class Resp {
 
-        @ApiModelProperty("access key")
+        @Schema(name = "access key")
         String ak;
-        @ApiModelProperty("ak create time")
+        @Schema(name = "ak create time")
         String ct;
-        @ApiModelProperty("ak create timestamp")
+        @Schema(name = "ak create timestamp")
         Long ctl;
-        @ApiModelProperty("ak will be expired at")
+        @Schema(name = "ak will be expired at")
         String et;
-        @ApiModelProperty("ak will be expired at this timestamp")
+        @Schema(name = "ak will be expired at this timestamp")
         Long etl;
-//        @ApiModelProperty("the time zone of the server")
-//        ZoneId zone = ZoneId.of("America/New_York");
+        // @Schema(name = "the time zone of the server")
+        // ZoneId zone = ZoneId.of("America/New_York");
 
         @Override
         public String toString() {

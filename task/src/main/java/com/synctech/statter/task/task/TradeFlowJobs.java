@@ -9,21 +9,22 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Component
 @Slf4j
 public class TradeFlowJobs {
 
-    @Resource
+    @Autowired
     TradeFlowMapper tradeFlowMapper;
 
-    @Resource
+    @Autowired
     TradeFlowService tradeFlowService;
 
     /**
-     * Analyze the transaction flow, and conduct business processing for the trading that belongs to the mining tax and pledge
+     * Analyze the transaction flow, and conduct business processing for the trading
+     * that belongs to the mining tax and pledge
      */
     @Scheduled(fixedDelay = 1000)
     @SchedulerLock(name = "TradeFlowJobs.analyzeTradeFlow", lockAtLeastFor = 100, lockAtMostFor = 60000)
@@ -34,7 +35,8 @@ public class TradeFlowJobs {
         if (CollectionUtils.isEmpty(l)) {
             return;
         }
-        log.info("Analyze the transaction flow: Discovered the unpreposed transaction flow, and started business running water treatment");
+        log.info(
+                "Analyze the transaction flow: Discovered the unpreposed transaction flow, and started business running water treatment");
         for (TradeFlow f : l) {
             log.info("Analyze the transaction flow -- start: {}", f);
             if (TradeFlow.TradeType.Tax.compare(f.getTradeType())) {

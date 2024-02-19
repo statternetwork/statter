@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.synctech</groupId>
@@ -16,33 +16,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <main.class>com.synctech.statter.manager.api.ManagerApiServerApplication</main.class>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <profiles.active>dev</profiles.active>
-                <docker.image.tag>latest</docker.image.tag>
-            </properties>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <profiles.active>test</profiles.active>
-                <docker.image.tag>${profiles.active}.${project.version}</docker.image.tag>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <profiles.active>prod</profiles.active>
-                <docker.image.tag>${profiles.active}.${project.version}</docker.image.tag>
-            </properties>
-        </profile>
-    </profiles>
 
     <dependencies>
         <!-- common -->
@@ -99,12 +72,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.retry</groupId>
@@ -118,30 +89,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <!--<scope>compile</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>net.javacrumbs.shedlock</groupId>
-            <artifactId>shedlock-spring</artifactId>
-            <version>4.39.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.javacrumbs.shedlock</groupId>
-            <artifactId>shedlock-provider-redis-jedis</artifactId>
-            <version>4.39.0</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.1.0</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
@@ -198,7 +145,7 @@
                 <version>2.6.0</version>
                 <configuration>
                     <from>
-                        <image>${image.repo.prefix}/openjdk:8u322-jdk-buster</image>
+                        <image>${image.repo.prefix}/${image.basic}</image>
                         <auth>
                             <username>${image.repo.auth.username}</username>
                             <password>${image.repo.auth.password}</password>
@@ -208,6 +155,7 @@
                         <image>${image.repo.prefix}/${project.artifactId}</image>
                         <tags>
                             <tag>latest</tag>
+                            <tag>${maven.build.timestamp}</tag>
                         </tags>
                         <auth>
                             <username>${image.repo.auth.username}</username>
@@ -219,14 +167,14 @@
                         <mainClass>${main.class}</mainClass>
                     </container>
                 </configuration>
-                <executions>
+                <!-- <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
 
         </plugins>

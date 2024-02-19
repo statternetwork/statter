@@ -10,20 +10,20 @@ import com.synctech.statter.redis.config.vo.Hget;
 import com.synctech.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
 @Service
 public class RuleService {
 
-    @Resource
+    @Autowired
     JedisService jedisService;
 
-    @Resource
+    @Autowired
     RuleMapper ruleMapper;
 
     @Transactional
@@ -43,9 +43,12 @@ public class RuleService {
 
     JSONObject getImpl(byte t) {
         String r = jedisService.hget(new Hget<>(CacheKey.CACHEKEY_ADMIN_RULE_BY_TYPE, t + "", CacheKey.CACHEKEY_ADMIN_RULE_BY_TYPE_LOCK, String.class),
-                p -> ruleMapper.findByType(t).getContent());
+                p -> {
+                    Rule rule = ruleMapper.findByType(t);
+                    return null != rule ? rule.getContent() : null;
+                });
         if (StringUtils.isBlank(r))
-            throw new AppBizException(HttpStatusExtend.ERROR_RULE_NOT_FOUND);
+            throw new AppBizException(HttpStatusExtend.ERROR_RULE_NOT_FOUND, t + "");
         return JSONObject.parseObject(r);
     }
 

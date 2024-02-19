@@ -3,21 +3,19 @@ package com.synctech.statter.common.service.vo.info;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.synctech.statter.base.entity.Miner;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
 public class Hash {
 
-    @ApiModelProperty(name = "h", value = "The average hash of the past minute")
+    @Schema(name = "h", description = "The average hash of the past minute")
     @JsonProperty("h")
     long h;
 
-    @ApiModelProperty(name = "t", value = "update time(timestamp)")
+    @Schema(name = "t", description = "update time(timestamp)")
     @JsonProperty("t")
     long t;
 

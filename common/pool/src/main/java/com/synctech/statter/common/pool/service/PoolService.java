@@ -2,7 +2,6 @@ package com.synctech.statter.common.pool.service;
 
 import cn.hutool.core.io.FastByteArrayOutputStream;
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.util.ZipUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.synctech.statter.common.pool.vo.Block;
@@ -27,6 +26,7 @@ import org.stringtemplate.v4.ST;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -36,12 +36,14 @@ import java.util.zip.ZipInputStream;
 @Service
 public class PoolService {
 
-    @Value("${statter.task.c-count:100}")
+    @Value("${statter.task.c-count:1}")
     Integer ccount;
     @Value("${statter.pool.host}")
-    String poolHost;
+    String poolHost = "10.128.0.4";
     @Value("${statter.pool.port}")
-    int poolPort;
+    int poolPort = 9010;
+    @Value("${statter.pool.port}")
+    int poolPortTokdesktop = 8083;
     @Value("${statter.pool.get-block-index-url:}")
     String getBlockIndexUrl;
     @Value("${statter.pool.get-pool-task-url:}")
@@ -56,9 +58,12 @@ public class PoolService {
         s.downloadBlockUrl = "http://<host>:<port>/tokdesktop/server/block.zip";
         s.poolHost = "34.134.98.47";
         s.poolPort = 80;
-        long bi = 40;
+        s.poolPortTokdesktop = 80;
+        long bi = 791583;
         InputStream is = s.downloadBlock(bi);
-        IoUtil.copy(is, new FileOutputStream("d:/tmp/blockdata." + bi + ".zip"));
+
+        Block b = s.queryBlockLedgerId(bi);
+        System.out.printf("block: %s", JSONObject.toJSONString(b));
     }
 
     private String getBlockIndexUrl() {
@@ -85,7 +90,7 @@ public class PoolService {
     private String downloadBlockUrl() {
         ST st = new ST(this.downloadBlockUrl);
         st.add("host", poolHost);
-        st.add("port", poolPort);
+        st.add("port", poolPortTokdesktop);
         return st.render();
     }
 
@@ -123,21 +128,29 @@ public class PoolService {
         params.put("walletAddress", walletAddress);
         params.put("blockIndex", blockIndex);
         params.put("machinesNum", hash);
-        log.info("get pool task: {}", params.toJSONString());
+        //log.info("get pool task [url = {}] : {}", url, params.toJSONString());
         try {
+            long st = System.currentTimeMillis();
             String resp = HttpClientUtils.postJSON(url, params);
             JSONObject r = JSONObject.parseObject(resp);
+//            log.info("ask pool task response [code = {}] [cost time = {}] : \n{}\n{}",
+//                    r.getString("code"),
+//                    System.currentTimeMillis() - st,
+//                    params.toJSONString(),
+//                    resp
+//            );
             if (!StringUtils.equals(r.getString("code"), "0")) {
-                log.warn("error on ask pool task : {}", resp);
                 throw new AppBizException(HttpStatusExtend.ERROR_POOL_GET_POOL_TASK);
             }
             PoolTask pt = r.getObject("content", PoolTask.class);
             pt.getBlock().setCCount(ccount);
+            log.info("get pool task success  [url = {}]: {}", url, pt.toString());
             return pt;
         } catch (AppBizException e) {
+            //log.error("get pool task error [url = {}]: {}", url, e.getMessage());
             throw e;
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_GET_POOL_TASK);
         }
     }
@@ -145,18 +158,20 @@ public class PoolService {
     public void commitPoolTaskUrl(MiningReportReq req) {
         String url = this.commitPoolTaskUrl();
         try {
-            log.info("commit compute result to pool: start = {}", JSONObject.toJSONString(req));
+            log.info("commit compute result to pool[start(148)]: {}", JSONObject.toJSONString(req));
             String resp = HttpClientUtils.postJSON(url, JSONUtils.toJSONObject(req));
             JSONObject r = JSONObject.parseObject(resp);
             if (!StringUtils.equals(r.getString("code"), "0")) {
-                log.warn("commit compute result to pool: error = {}", resp);
+                if (!StringUtils.equals(r.getString("code"), "-1"))
+                    throw new AppBizException(HttpStatusExtend.ERROR_POOL_COMMIT_RESULT_EXPIRE_BLOCKINDEX);
+                log.warn("commit compute result response error[code={}]: {}", r.getString("code"), resp);
                 throw new AppBizException(HttpStatusExtend.ERROR_POOL_COMMIT_RESULT);
             }
-            log.info("commit compute result to pool: end = {}", r.toJSONString());
+            log.info("commit compute result to pool[success(155)]: {}", r.toJSONString());
         } catch (AppBizException e) {
             throw e;
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("commit compute result to pool[commitPoolTaskUrl(159)]: {}", e.getMessage());
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_COMMIT_RESULT);
         }
     }
@@ -165,11 +180,25 @@ public class PoolService {
         JSONArray r = new JSONArray();
         ZipInputStream zis = null;
         try {
-            zis = new ZipInputStream(this.downloadBlock(blockIndex));
-            ZipInputStream finalZis = zis;
+            zis = new ZipInputStream(this.downloadBlock(blockIndex), Charset.forName("UTF-8"));
+            ZipEntry ze = null;
+            while ((ze = zis.getNextEntry()) != null) {
+                if (StringUtils.equals("contractblockfile", ze.getName())) { // tradeflow
+                    FastByteArrayOutputStream fbaos = IoUtil.read(zis);
+                    String c = new String(fbaos.toByteArray());
+                    fbaos.close();
+                    if (!org.apache.commons.lang3.StringUtils.isBlank(c)) {
+                        for (Object o : JSONArray.parseArray(c)) {
+                            if (((JSONObject) o).size() > 0) r.add(o);
+                        }
+                    }
+                    break;
+                }
+            }
+            /*ZipInputStream finalZis = zis;
             ZipUtil.read(zis, zipEntry -> {
                 if (StringUtils.equals("contractblockfile", zipEntry.getName())) { // tradeflow
-                    FastByteArrayOutputStream fbaos = IoUtil.read(finalZis, false);
+                    FastByteArrayOutputStream fbaos = IoUtil.read(finalZis);
                     String c = new String(fbaos.toByteArray());
                     fbaos.close();
                     if (!org.apache.commons.lang3.StringUtils.isBlank(c)) {
@@ -178,8 +207,11 @@ public class PoolService {
                         }
                     }
                 }
-            });
+            });*/
             return r;
+        } catch (IOException e) {
+            log.error("error occur when analyze contract block file:", e);
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (zis != null) zis.close();
@@ -192,20 +224,35 @@ public class PoolService {
     public Block queryBlockLedgerId(long blockIndex) {
         ZipInputStream zis = null;
         try {
-            zis = new ZipInputStream(this.downloadBlock(blockIndex));
-            ZipInputStream finalZis = zis;
+            zis = new ZipInputStream(this.downloadBlock(blockIndex), Charset.forName("UTF-8"));
             AtomicReference<Block> b = new AtomicReference<>();
+            ZipEntry ze = null;
+            while ((ze = zis.getNextEntry()) != null) {
+                if (StringUtils.equals("blockObject", ze.getName())) { // block info
+                    FastByteArrayOutputStream fbaos = IoUtil.read(zis);
+                    String c = new String(fbaos.toByteArray());
+                    fbaos.close();
+                    if (!StringUtils.isBlank(c)) {
+                        b.set(JSONObject.parseObject(c, Block.class));
+                    }
+                    break;
+                }
+            }
+            /*ZipInputStream finalZis = zis;
             ZipUtil.read(zis, zipEntry -> {
                 if (StringUtils.equals("blockObject", zipEntry.getName())) { // block info
-                    FastByteArrayOutputStream fbaos = IoUtil.read(finalZis, false);
+                    FastByteArrayOutputStream fbaos = IoUtil.read(finalZis);
                     String c = new String(fbaos.toByteArray());
                     fbaos.close();
                     if (!StringUtils.isBlank(c)) {
                         b.set(JSONObject.parseObject(c, Block.class));
                     }
                 }
-            });
+            });*/
             return b.get();
+        } catch (IOException e) {
+            log.error("error occur when analyze block object:", e);
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (zis != null) zis.close();
@@ -231,9 +278,12 @@ public class PoolService {
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             response = httpClient.execute(httpPost);
-            return response.getEntity().getContent();
+            InputStream is = response.getEntity().getContent();
+            byte[] d = IoUtil.readBytes(is);
+            ByteArrayInputStream bis = IoUtil.toStream(d);
+            return bis;
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             throw new AppBizException(HttpStatusExtend.ERROR_POOL_DOWNLOAD_BLOCK);
         } finally {
             try {
