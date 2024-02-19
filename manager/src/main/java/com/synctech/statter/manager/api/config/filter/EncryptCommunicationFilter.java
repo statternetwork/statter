@@ -6,21 +6,21 @@ import cn.hutool.crypto.asymmetric.RSA;
 import com.synctech.statter.constant.HttpStatusExtend;
 import com.synctech.statter.constant.restful.AppBizException;
 import com.synctech.statter.redis.jedis.JedisService;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@Component("EncryptdCommunicationFileter")
-public class EncryptdCommunicationFileter implements Filter {
+@Component("EncryptCommunicationFilter")
+public class EncryptCommunicationFilter implements Filter {
 
     @Autowired
     JedisService jedisService;

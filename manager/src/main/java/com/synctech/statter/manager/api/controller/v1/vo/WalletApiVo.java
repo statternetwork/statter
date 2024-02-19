@@ -1,7 +1,7 @@
 package com.synctech.statter.manager.api.controller.v1.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,15 +13,14 @@ public class WalletApiVo {
     @NoArgsConstructor
     public static class RenameReq implements Serializable {
 
-        @ApiModelProperty(name = "a", value = "Wallet Address, defaults to the extension string that has begun at the beginning of ST.")
+        @Schema(name = "a", description = "Wallet Address, defaults to the extension string that has begun at the beginning of ST.")
         @JsonProperty("a")
         String address;
 
-        @ApiModelProperty(name = "alias", value = "Alias name for this wallet account")
+        @Schema(name = "alias", description = "Alias name for this wallet account")
         @JsonProperty("alias")
         String alias;
 
     }
-
 
 }

@@ -1,6 +1,6 @@
 package com.synctech.statter.mining.pool.api.controller.v1.admin.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,9 @@ public abstract class RefreshSecretKey {
     @Accessors(chain = true)
     public static class Req {
 
-        @ApiModelProperty("pool address")
+        @Schema(name = "pool address")
         String a;
-        @ApiModelProperty("management key")
+        @Schema(name = "management key")
         String mk;
 
     }

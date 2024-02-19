@@ -3,19 +3,19 @@ package com.synctech.statter.mining.pool.api.config.filter;
 import com.synctech.statter.base.entity.Promotion;
 import com.synctech.statter.constant.restful.AppBizException;
 import com.synctech.statter.redis.jedis.JedisService;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@Component("ApiCountFileter")
-public class ApiCountFileter implements Filter {
+@Component("ApiCountFilter")
+public class ApiCountFilter implements Filter {
 
     @Autowired
     JedisService jedisService;

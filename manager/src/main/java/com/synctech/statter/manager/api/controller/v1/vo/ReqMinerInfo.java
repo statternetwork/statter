@@ -14,6 +14,6 @@ public class ReqMinerInfo {
     String mi;// machine id
     String cm;// cpu model
     int v;
+    String ver;
+    String dv;
 }
-
-

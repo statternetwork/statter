@@ -7,13 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
-public class FileterConfiguration {
+public class FilterConfiguration {
 
     @Autowired
-    @Bean("FilterRegistrationBeanEncryptdCommunicationFileter")
-    public FilterRegistrationBean<EncryptdCommunicationFileter> registeAccessKeyFileter(
-            EncryptdCommunicationFileter f) {
-        FilterRegistrationBean<EncryptdCommunicationFileter> reg = new FilterRegistrationBean();
+    @Bean("FilterRegistrationBeanEncryptCommunicationFilter")
+    public FilterRegistrationBean<EncryptCommunicationFilter> regAccessKeyFilter(EncryptCommunicationFilter f) {
+        FilterRegistrationBean<EncryptCommunicationFilter> reg = new FilterRegistrationBean();
         reg.setFilter(f);
         reg.addUrlPatterns("/v1/*");
         reg.setOrder(2);
