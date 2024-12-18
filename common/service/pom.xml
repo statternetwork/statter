@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.synctech</groupId>
+        <groupId>com.statter</groupId>
         <artifactId>statter.common</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -18,22 +18,22 @@
     <dependencies>
         <!-- base -->
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.constant</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.util</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.pool</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.base</artifactId>
             <version>${project.parent.version}</version>
             <exclusions>
@@ -45,7 +45,7 @@
         </dependency>
         <!-- component -->
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.component.redis</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

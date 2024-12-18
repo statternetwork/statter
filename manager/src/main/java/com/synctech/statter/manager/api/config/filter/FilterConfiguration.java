@@ -1,4 +1,4 @@
-package com.synctech.statter.manager.api.config.filter;
+package com.statter.statter.manager.api.config.filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

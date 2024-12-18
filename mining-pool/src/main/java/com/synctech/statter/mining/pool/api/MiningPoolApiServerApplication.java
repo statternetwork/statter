@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api;
+package com.statter.statter.mining.pool.api;
 
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -7,13 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 
-@MapperScan("com.synctech.statter.base.mapper")
+@MapperScan("com.statter.statter.base.mapper")
 @SpringBootApplication(scanBasePackages = {//
-        "com.synctech.statter.base.entity", //
-        "com.synctech.statter.redis",//
-        "com.synctech.statter.constant.swagger",//
-        "com.synctech.statter.common.service", //
-        "com.synctech.statter.mining.pool.api",//
+        "com.statter.statter.base.entity", //
+        "com.statter.statter.redis",//
+        "com.statter.statter.constant.swagger",//
+        "com.statter.statter.common.service", //
+        "com.statter.statter.mining.pool.api",//
 })
 public class MiningPoolApiServerApplication {
 

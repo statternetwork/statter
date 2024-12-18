@@ -1,4 +1,4 @@
-package com.synctech.statter.base;
+package com.statter.statter.base;
 
 import lombok.Data;
 

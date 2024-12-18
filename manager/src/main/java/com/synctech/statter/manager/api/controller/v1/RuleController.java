@@ -1,9 +1,9 @@
-package com.synctech.statter.manager.api.controller.v1;
+package com.statter.statter.manager.api.controller.v1;
 
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Rule;
-import com.synctech.statter.common.service.service.RuleService;
-import com.synctech.statter.constant.restful.DataResponse;
+import com.statter.statter.base.entity.Rule;
+import com.statter.statter.common.service.service.RuleService;
+import com.statter.statter.constant.restful.DataResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

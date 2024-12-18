@@ -1,8 +1,8 @@
-package com.synctech.statter.constant.restful;
+package com.statter.statter.constant.restful;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.synctech.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.HttpStatusExtend;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

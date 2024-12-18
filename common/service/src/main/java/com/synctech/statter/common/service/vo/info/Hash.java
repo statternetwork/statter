@@ -1,8 +1,8 @@
-package com.synctech.statter.common.service.vo.info;
+package com.statter.statter.common.service.vo.info;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.synctech.statter.base.entity.Miner;
+import com.statter.statter.base.entity.Miner;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;

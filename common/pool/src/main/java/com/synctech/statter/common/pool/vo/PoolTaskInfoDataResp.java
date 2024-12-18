@@ -1,4 +1,4 @@
-package com.synctech.statter.common.pool.vo;
+package com.statter.statter.common.pool.vo;
 
 import lombok.Data;
 

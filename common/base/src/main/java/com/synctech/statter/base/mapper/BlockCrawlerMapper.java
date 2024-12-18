@@ -1,4 +1,4 @@
-package com.synctech.statter.base.mapper;
+package com.statter.statter.base.mapper;
 
 
 import org.apache.ibatis.annotations.*;

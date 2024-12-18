@@ -52,7 +52,7 @@ swagger:
   enable: ${SHOW_SWAGGER:false}
 
 mybatis:
-  type-aliases-package: com.synctech.statter.base.entity
+  type-aliases-package: com.statter.statter.base.entity
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: NULL

@@ -1,11 +1,11 @@
-package com.synctech.statter.manager.api.config.filter;
+package com.statter.statter.manager.api.config.filter;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.redis.jedis.JedisService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

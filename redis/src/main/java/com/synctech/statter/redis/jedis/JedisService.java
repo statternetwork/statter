@@ -1,8 +1,8 @@
-package com.synctech.statter.redis.jedis;
+package com.statter.statter.redis.jedis;
 
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.redis.config.vo.Get;
-import com.synctech.statter.redis.config.vo.Hget;
+import com.statter.statter.redis.config.vo.Get;
+import com.statter.statter.redis.config.vo.Hget;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

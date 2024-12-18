@@ -1,4 +1,4 @@
-package com.synctech.statter.manager.api.controller.v1.vo;
+package com.statter.statter.manager.api.controller.v1.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 @Data
 @AllArgsConstructor

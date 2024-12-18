@@ -1,13 +1,13 @@
-package com.synctech.statter.common.service.service;
+package com.statter.statter.common.service.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Rule;
-import com.synctech.statter.base.mapper.RuleMapper;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.redis.config.vo.Hget;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Rule;
+import com.statter.statter.base.mapper.RuleMapper;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.redis.config.vo.Hget;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

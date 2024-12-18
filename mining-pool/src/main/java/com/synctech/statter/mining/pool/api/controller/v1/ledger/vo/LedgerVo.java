@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api.controller.v1.ledger.vo;
+package com.statter.statter.mining.pool.api.controller.v1.ledger.vo;
 
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.v3.oas.annotations.media.Schema;

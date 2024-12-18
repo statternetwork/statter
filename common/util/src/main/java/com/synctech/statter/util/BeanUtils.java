@@ -1,7 +1,7 @@
-package com.synctech.statter.util;
+package com.statter.statter.util;
 
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 

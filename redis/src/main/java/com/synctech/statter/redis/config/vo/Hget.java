@@ -1,4 +1,4 @@
-package com.synctech.statter.redis.config.vo;
+package com.statter.statter.redis.config.vo;
 
 import lombok.Data;
 

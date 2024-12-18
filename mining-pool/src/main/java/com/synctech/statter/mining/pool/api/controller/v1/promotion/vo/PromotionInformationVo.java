@@ -1,10 +1,10 @@
-package com.synctech.statter.mining.pool.api.controller.v1.promotion.vo;
+package com.statter.statter.mining.pool.api.controller.v1.promotion.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 @Data
 @Accessors(chain = true)

@@ -1,4 +1,4 @@
-package com.synctech.statter.administrator.api.controller.v1.tax.vo;
+package com.statter.statter.administrator.api.controller.v1.tax.vo;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.NumberUtil;

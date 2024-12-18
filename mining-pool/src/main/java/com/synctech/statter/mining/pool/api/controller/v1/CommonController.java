@@ -1,11 +1,11 @@
-package com.synctech.statter.mining.pool.api.controller.v1;
+package com.statter.statter.mining.pool.api.controller.v1;
 
-import com.synctech.statter.base.entity.Promotion;
-import com.synctech.statter.common.service.service.HashService;
-import com.synctech.statter.common.service.service.PromotionService;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Promotion;
+import com.statter.statter.common.service.service.HashService;
+import com.statter.statter.common.service.service.PromotionService;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.redis.jedis.JedisService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

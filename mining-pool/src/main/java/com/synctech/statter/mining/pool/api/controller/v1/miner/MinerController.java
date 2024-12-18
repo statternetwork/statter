@@ -1,6 +1,6 @@
-package com.synctech.statter.mining.pool.api.controller.v1.miner;
+package com.statter.statter.mining.pool.api.controller.v1.miner;
 
-import com.synctech.statter.mining.pool.api.controller.v1.CommonController;
+import com.statter.statter.mining.pool.api.controller.v1.CommonController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;

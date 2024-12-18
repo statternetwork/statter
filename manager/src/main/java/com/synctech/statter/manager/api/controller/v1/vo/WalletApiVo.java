@@ -1,4 +1,4 @@
-package com.synctech.statter.manager.api.controller.v1.vo;
+package com.statter.statter.manager.api.controller.v1.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,17 +1,17 @@
-// package com.synctech.statter.task.task;
+// package com.statter.statter.task.task;
 
 // import cn.hutool.core.util.NumberUtil;
 // import cn.hutool.json.JSONArray;
 // import com.alibaba.fastjson.JSONObject;
-// import com.synctech.statter.base.entity.Ledger;
-// import com.synctech.statter.base.entity.Promotion;
-// import com.synctech.statter.base.mapper.LedgerMapper;
-// import com.synctech.statter.base.mapper.PromotionLedgerMapper;
-// import com.synctech.statter.base.mapper.PromotionMapper;
-// import com.synctech.statter.common.pool.service.PoolService;
-// import com.synctech.statter.common.service.vo.info.MinerVo;
-// import com.synctech.statter.constant.CacheKey;
-// import com.synctech.statter.redis.jedis.JedisService;
+// import com.statter.statter.base.entity.Ledger;
+// import com.statter.statter.base.entity.Promotion;
+// import com.statter.statter.base.mapper.LedgerMapper;
+// import com.statter.statter.base.mapper.PromotionLedgerMapper;
+// import com.statter.statter.base.mapper.PromotionMapper;
+// import com.statter.statter.common.pool.service.PoolService;
+// import com.statter.statter.common.service.vo.info.MinerVo;
+// import com.statter.statter.constant.CacheKey;
+// import com.statter.statter.redis.jedis.JedisService;
 // import lombok.extern.slf4j.Slf4j;
 // import net.javacrumbs.shedlock.core.SchedulerLock;
 // import org.apache.commons.lang3.StringUtils;

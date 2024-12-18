@@ -1,4 +1,4 @@
-package com.synctech.statter.mock.api.vo;
+package com.statter.statter.mock.api.vo;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

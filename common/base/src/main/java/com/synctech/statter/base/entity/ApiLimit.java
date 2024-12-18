@@ -1,4 +1,4 @@
-package com.synctech.statter.base.entity;
+package com.statter.statter.base.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

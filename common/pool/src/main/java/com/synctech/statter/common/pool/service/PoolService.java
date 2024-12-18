@@ -1,16 +1,16 @@
-package com.synctech.statter.common.pool.service;
+package com.statter.statter.common.pool.service;
 
 import cn.hutool.core.io.FastByteArrayOutputStream;
 import cn.hutool.core.io.IoUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.common.pool.vo.Block;
-import com.synctech.statter.common.pool.vo.MiningReportReq;
-import com.synctech.statter.common.pool.vo.PoolTask;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.util.HttpClientUtils;
-import com.synctech.statter.util.JSONUtils;
+import com.statter.statter.common.pool.vo.Block;
+import com.statter.statter.common.pool.vo.MiningReportReq;
+import com.statter.statter.common.pool.vo.PoolTask;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.util.HttpClientUtils;
+import com.statter.statter.util.JSONUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.config.RequestConfig;

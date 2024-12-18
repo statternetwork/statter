@@ -1,4 +1,4 @@
-package com.synctech.statter.util;
+package com.statter.statter.util;
 
 public class HexUtil {
 

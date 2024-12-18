@@ -1,8 +1,8 @@
-package com.synctech.statter.mining.pool.api.config.restful;
+package com.statter.statter.mining.pool.api.config.restful;
 
 import cn.hutool.json.JSONObject;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

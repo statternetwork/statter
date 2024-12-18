@@ -1,4 +1,4 @@
-package com.synctech.statter.constant;
+package com.statter.statter.constant;
 
 public abstract class CacheKey {
 

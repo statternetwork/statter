@@ -1,7 +1,7 @@
-package com.synctech.statter.common.service.vo.info;
+package com.statter.statter.common.service.vo.info;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.synctech.statter.base.entity.Wallet;
+import com.statter.statter.base.entity.Wallet;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

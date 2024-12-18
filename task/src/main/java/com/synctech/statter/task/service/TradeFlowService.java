@@ -1,11 +1,11 @@
-package com.synctech.statter.task.service;
+package com.statter.statter.task.service;
 
-import com.synctech.statter.base.entity.Process;
-import com.synctech.statter.base.entity.*;
-import com.synctech.statter.base.mapper.*;
-import com.synctech.statter.common.service.service.PromotionService;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Process;
+import com.statter.statter.base.entity.*;
+import com.statter.statter.base.mapper.*;
+import com.statter.statter.common.service.service.PromotionService;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

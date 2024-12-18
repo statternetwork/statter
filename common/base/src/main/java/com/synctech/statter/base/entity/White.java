@@ -1,4 +1,4 @@
-package com.synctech.statter.base.entity;
+package com.statter.statter.base.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

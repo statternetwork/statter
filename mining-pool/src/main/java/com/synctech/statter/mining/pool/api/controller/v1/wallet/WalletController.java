@@ -1,12 +1,12 @@
-package com.synctech.statter.mining.pool.api.controller.v1.wallet;
+package com.statter.statter.mining.pool.api.controller.v1.wallet;
 
-import com.synctech.statter.common.service.service.HashService;
-import com.synctech.statter.common.service.service.MinerService;
-import com.synctech.statter.common.service.service.PromotionService;
-import com.synctech.statter.common.service.service.WalletService;
-import com.synctech.statter.common.service.vo.info.MinerVo;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.DataResponse;
+import com.statter.statter.common.service.service.HashService;
+import com.statter.statter.common.service.service.MinerService;
+import com.statter.statter.common.service.service.PromotionService;
+import com.statter.statter.common.service.service.WalletService;
+import com.statter.statter.common.service.vo.info.MinerVo;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.DataResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

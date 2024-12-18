@@ -1,6 +1,6 @@
-package com.synctech.statter.constant;
+package com.statter.statter.constant;
 
-import com.synctech.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.AppBizException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;

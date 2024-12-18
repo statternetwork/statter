@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api.config.filter;
+package com.statter.statter.mining.pool.api.config.filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

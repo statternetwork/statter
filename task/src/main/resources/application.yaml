@@ -52,8 +52,8 @@ swagger:
   enable: ${SHOW_SWAGGER:false}
 
 mybatis:
-  mapper-locations: classpath:com/synctech/statter/base/mapper/*.xml
-  type-aliases-package: com.synctech.statter.base.entity
+  mapper-locations: classpath:com/statter/statter/base/mapper/*.xml
+  type-aliases-package: com.statter.statter.base.entity
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: NULL

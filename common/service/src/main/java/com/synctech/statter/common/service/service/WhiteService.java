@@ -1,12 +1,12 @@
-package com.synctech.statter.common.service.service;
+package com.statter.statter.common.service.service;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Rule;
-import com.synctech.statter.base.entity.White;
-import com.synctech.statter.base.mapper.WhiteMapper;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Rule;
+import com.statter.statter.base.entity.White;
+import com.statter.statter.base.mapper.WhiteMapper;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

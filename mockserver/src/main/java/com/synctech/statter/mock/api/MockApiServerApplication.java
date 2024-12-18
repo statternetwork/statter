@@ -1,4 +1,4 @@
-package com.synctech.statter.mock.api;
+package com.statter.statter.mock.api;
 
 
 import org.springframework.boot.SpringApplication;
@@ -7,9 +7,9 @@ import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication(scanBasePackages = {//
-        "com.synctech.statter.constant", //
-        "com.synctech.statter.redis",//
-        "com.synctech.statter.mock.api"//
+        "com.statter.statter.constant", //
+        "com.statter.statter.redis",//
+        "com.statter.statter.mock.api"//
 })
 public class MockApiServerApplication {
 

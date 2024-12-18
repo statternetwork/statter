@@ -1,7 +1,7 @@
-package com.synctech.statter.util;
+package com.statter.statter.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.AppBizException;
 import lombok.Data;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

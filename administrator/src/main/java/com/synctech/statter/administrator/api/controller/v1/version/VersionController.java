@@ -1,12 +1,12 @@
-package com.synctech.statter.administrator.api.controller.v1.version;
+package com.statter.statter.administrator.api.controller.v1.version;
 
-import com.synctech.statter.administrator.api.controller.v1.version.vo.ReqMinerVersionAddNewVer;
-import com.synctech.statter.base.entity.Rule;
-import com.synctech.statter.common.service.service.RuleService;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.constant.restful.DataResponse;
-import com.synctech.statter.util.JSONUtils;
+import com.statter.statter.administrator.api.controller.v1.version.vo.ReqMinerVersionAddNewVer;
+import com.statter.statter.base.entity.Rule;
+import com.statter.statter.common.service.service.RuleService;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.DataResponse;
+import com.statter.statter.util.JSONUtils;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

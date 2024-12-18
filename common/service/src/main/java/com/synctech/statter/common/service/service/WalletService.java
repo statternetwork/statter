@@ -1,16 +1,16 @@
-package com.synctech.statter.common.service.service;
+package com.statter.statter.common.service.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.synctech.statter.base.entity.Miner;
-import com.synctech.statter.base.entity.Wallet;
-import com.synctech.statter.base.mapper.MinerMapper;
-import com.synctech.statter.base.mapper.WalletMapper;
-import com.synctech.statter.common.service.vo.info.WalletVo;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.redis.config.vo.Hget;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Miner;
+import com.statter.statter.base.entity.Wallet;
+import com.statter.statter.base.mapper.MinerMapper;
+import com.statter.statter.base.mapper.WalletMapper;
+import com.statter.statter.common.service.vo.info.WalletVo;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.redis.config.vo.Hget;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
-import static com.synctech.statter.constant.Constant.checkWalletAddress;
+import static com.statter.statter.constant.Constant.checkWalletAddress;
 
 @Slf4j
 @Service

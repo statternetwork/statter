@@ -1,4 +1,4 @@
-package com.synctech.statter.base.entity;
+package com.statter.statter.base.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 /**
  * the mining machine

@@ -1,13 +1,13 @@
-package com.synctech.statter.administrator.api.controller.v1.white;
+package com.statter.statter.administrator.api.controller.v1.white;
 
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Rule;
-import com.synctech.statter.base.entity.White;
-import com.synctech.statter.common.service.service.RuleService;
-import com.synctech.statter.common.service.service.WhiteService;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.constant.restful.DataResponse;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Rule;
+import com.statter.statter.base.entity.White;
+import com.statter.statter.common.service.service.RuleService;
+import com.statter.statter.common.service.service.WhiteService;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.constant.restful.DataResponse;
+import com.statter.statter.redis.jedis.JedisService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

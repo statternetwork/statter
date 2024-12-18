@@ -1,6 +1,6 @@
-package com.synctech.statter.constant.restful;
+package com.statter.statter.constant.restful;
 
-import com.synctech.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.HttpStatusExtend;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;

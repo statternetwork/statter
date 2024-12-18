@@ -1,10 +1,10 @@
-package com.synctech.statter.common.service.service;
+package com.statter.statter.common.service.service;
 
 import cn.hutool.core.date.DateUtil;
-import com.synctech.statter.base.entity.Process;
-import com.synctech.statter.base.mapper.ProcessMapper;
-import com.synctech.statter.common.service.vo.info.MinerVo;
-import com.synctech.statter.common.service.vo.info.WalletVo;
+import com.statter.statter.base.entity.Process;
+import com.statter.statter.base.mapper.ProcessMapper;
+import com.statter.statter.common.service.vo.info.MinerVo;
+import com.statter.statter.common.service.vo.info.WalletVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package com.synctech.statter.redis.jedis;
+package com.statter.statter.redis.jedis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
-package com.synctech.statter.base.mapper;
+package com.statter.statter.base.mapper;
 
-import com.synctech.statter.base.entity.Promotion;
+import com.statter.statter.base.entity.Promotion;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

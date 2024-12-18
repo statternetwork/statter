@@ -1,7 +1,7 @@
-package com.synctech.statter.base.mapper;
+package com.statter.statter.base.mapper;
 
 
-import com.synctech.statter.base.entity.White;
+import com.statter.statter.base.entity.White;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

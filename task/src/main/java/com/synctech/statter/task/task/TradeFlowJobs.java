@@ -1,8 +1,8 @@
-package com.synctech.statter.task.task;
+package com.statter.statter.task.task;
 
-import com.synctech.statter.base.entity.TradeFlow;
-import com.synctech.statter.base.mapper.TradeFlowMapper;
-import com.synctech.statter.task.service.TradeFlowService;
+import com.statter.statter.base.entity.TradeFlow;
+import com.statter.statter.base.mapper.TradeFlowMapper;
+import com.statter.statter.task.service.TradeFlowService;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.core.SchedulerLock;
 import org.springframework.scheduling.annotation.Scheduled;

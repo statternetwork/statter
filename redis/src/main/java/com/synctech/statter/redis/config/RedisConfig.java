@@ -1,4 +1,4 @@
-package com.synctech.statter.redis.config;
+package com.statter.statter.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

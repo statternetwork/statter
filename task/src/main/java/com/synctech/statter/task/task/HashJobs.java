@@ -1,15 +1,15 @@
-package com.synctech.statter.task.task;
+package com.statter.statter.task.task;
 
 import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Miner;
-import com.synctech.statter.base.entity.Wallet;
-import com.synctech.statter.base.mapper.MinerMapper;
-import com.synctech.statter.base.mapper.WalletMapper;
-import com.synctech.statter.common.service.service.HashService;
-import com.synctech.statter.common.service.vo.info.Hash;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Miner;
+import com.statter.statter.base.entity.Wallet;
+import com.statter.statter.base.mapper.MinerMapper;
+import com.statter.statter.base.mapper.WalletMapper;
+import com.statter.statter.common.service.service.HashService;
+import com.statter.statter.common.service.vo.info.Hash;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.core.SchedulerLock;
 import org.apache.commons.lang3.StringUtils;

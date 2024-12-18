@@ -1,4 +1,4 @@
-package com.synctech.statter.manager.api.controller.v1.vo;
+package com.statter.statter.manager.api.controller.v1.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

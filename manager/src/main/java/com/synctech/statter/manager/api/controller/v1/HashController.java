@@ -1,14 +1,14 @@
-package com.synctech.statter.manager.api.controller.v1;
+package com.statter.statter.manager.api.controller.v1;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Promotion;
-import com.synctech.statter.base.mapper.PromotionMapper;
-import com.synctech.statter.common.service.service.HashService;
-import com.synctech.statter.common.service.service.MinerService;
-import com.synctech.statter.common.service.service.PromotionService;
-import com.synctech.statter.common.service.vo.info.MinerVo;
-import com.synctech.statter.constant.restful.DataResponse;
+import com.statter.statter.base.entity.Promotion;
+import com.statter.statter.base.mapper.PromotionMapper;
+import com.statter.statter.common.service.service.HashService;
+import com.statter.statter.common.service.service.MinerService;
+import com.statter.statter.common.service.service.PromotionService;
+import com.statter.statter.common.service.vo.info.MinerVo;
+import com.statter.statter.constant.restful.DataResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

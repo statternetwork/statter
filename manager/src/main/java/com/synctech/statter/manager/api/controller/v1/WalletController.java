@@ -1,14 +1,14 @@
-package com.synctech.statter.manager.api.controller.v1;
+package com.statter.statter.manager.api.controller.v1;
 
-import com.synctech.statter.base.entity.Promotion;
-import com.synctech.statter.base.entity.Wallet;
-import com.synctech.statter.common.service.service.*;
-import com.synctech.statter.common.service.vo.info.MinerVo;
-import com.synctech.statter.common.service.vo.info.WalletVo;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.constant.restful.DataResponse;
-import com.synctech.statter.manager.api.controller.v1.vo.WalletApiVo;
+import com.statter.statter.base.entity.Promotion;
+import com.statter.statter.base.entity.Wallet;
+import com.statter.statter.common.service.service.*;
+import com.statter.statter.common.service.vo.info.MinerVo;
+import com.statter.statter.common.service.vo.info.WalletVo;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.DataResponse;
+import com.statter.statter.manager.api.controller.v1.vo.WalletApiVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

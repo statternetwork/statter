@@ -1,11 +1,11 @@
-package com.synctech.statter.administrator.api.controller.v1.pool;
+package com.statter.statter.administrator.api.controller.v1.pool;
 
-import com.synctech.statter.base.entity.ApiLimit;
-import com.synctech.statter.base.mapper.ApiLimitMapper;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.constant.restful.DataResponse;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.ApiLimit;
+import com.statter.statter.base.mapper.ApiLimitMapper;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.DataResponse;
+import com.statter.statter.redis.jedis.JedisService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

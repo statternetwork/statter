@@ -1,8 +1,8 @@
-package com.synctech.statter.mining.pool.api.config.filter;
+package com.statter.statter.mining.pool.api.config.filter;
 
-import com.synctech.statter.base.entity.Promotion;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Promotion;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.redis.jedis.JedisService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

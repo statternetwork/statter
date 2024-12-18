@@ -1,17 +1,17 @@
-package com.synctech.statter.mining.pool.api.controller.v1.admin;
+package com.statter.statter.mining.pool.api.controller.v1.admin;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.MD5;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.Promotion;
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.constant.HttpStatusExtend;
-import com.synctech.statter.constant.restful.AppBizException;
-import com.synctech.statter.constant.restful.DataResponse;
-import com.synctech.statter.mining.pool.api.controller.v1.CommonController;
-import com.synctech.statter.mining.pool.api.controller.v1.admin.vo.GetAccessKey;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.base.entity.Promotion;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.restful.AppBizException;
+import com.statter.statter.constant.restful.DataResponse;
+import com.statter.statter.mining.pool.api.controller.v1.CommonController;
+import com.statter.statter.mining.pool.api.controller.v1.admin.vo.GetAccessKey;
+import com.statter.statter.redis.jedis.JedisService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

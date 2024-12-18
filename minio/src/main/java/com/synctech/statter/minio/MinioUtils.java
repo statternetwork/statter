@@ -1,4 +1,4 @@
-// package com.synctech.statter.minio;
+// package com.statter.statter.minio;
 
 // import io.minio.MinioClient;
 

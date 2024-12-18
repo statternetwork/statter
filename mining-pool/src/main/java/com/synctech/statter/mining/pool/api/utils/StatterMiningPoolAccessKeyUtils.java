@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api.utils;
+package com.statter.statter.mining.pool.api.utils;
 
 import cn.hutool.json.JSONObject;
 import org.apache.http.Header;

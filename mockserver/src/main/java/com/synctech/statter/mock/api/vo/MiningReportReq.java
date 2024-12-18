@@ -1,4 +1,4 @@
-package com.synctech.statter.mock.api.vo;
+package com.statter.statter.mock.api.vo;
 
 import cn.hutool.core.util.NumberUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
-import static com.synctech.statter.constant.Constant.checkWalletAddress;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.checkWalletAddress;
 
 
 @Data

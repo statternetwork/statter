@@ -1,9 +1,9 @@
-package com.synctech.statter.common.pool.vo;
+package com.statter.statter.common.pool.vo;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.synctech.statter.util.HexUtil;
-import com.synctech.statter.util.Sha256Util;
+import com.statter.statter.util.HexUtil;
+import com.statter.statter.util.Sha256Util;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

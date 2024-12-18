@@ -1,6 +1,6 @@
-package com.synctech.statter.constant.restful;
+package com.statter.statter.constant.restful;
 
-import com.synctech.statter.constant.HttpStatusExtend;
+import com.statter.statter.constant.HttpStatusExtend;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 

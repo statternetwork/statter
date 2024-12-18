@@ -1,13 +1,13 @@
-package com.synctech.statter.base.mapper;
+package com.statter.statter.base.mapper;
 
 
-import com.synctech.statter.base.entity.Ledger;
+import com.statter.statter.base.entity.Ledger;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 @Mapper
 @Repository

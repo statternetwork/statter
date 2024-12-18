@@ -1,4 +1,4 @@
-package com.synctech.statter.redis.config;
+package com.statter.statter.redis.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

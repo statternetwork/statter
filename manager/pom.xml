@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.synctech</groupId>
+        <groupId>com.statter</groupId>
         <artifactId>statter</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -14,23 +14,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <main.class>com.synctech.statter.manager.api.ManagerApiServerApplication</main.class>
+        <main.class>com.statter.statter.manager.api.ManagerApiServerApplication</main.class>
     </properties>
 
     <dependencies>
         <!-- common -->
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.constant</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.util</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.base</artifactId>
             <version>${project.parent.version}</version>
             <exclusions>
@@ -41,7 +41,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.service</artifactId>
             <version>${project.parent.version}</version>
             <exclusions>
@@ -53,7 +53,7 @@
         </dependency>
         <!-- component -->
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.component.redis</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

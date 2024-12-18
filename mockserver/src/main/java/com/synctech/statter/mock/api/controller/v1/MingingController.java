@@ -1,12 +1,12 @@
-package com.synctech.statter.mock.api.controller.v1;
+package com.statter.statter.mock.api.controller.v1;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.MD5;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.mock.api.vo.*;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.mock.api.vo.*;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

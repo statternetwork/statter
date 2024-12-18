@@ -1,9 +1,9 @@
-package com.synctech.statter.common.service.vo.info;
+package com.statter.statter.common.service.vo.info;
 
 import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.synctech.statter.base.entity.Miner;
-import com.synctech.statter.base.entity.Process;
+import com.statter.statter.base.entity.Miner;
+import com.statter.statter.base.entity.Process;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package com.synctech.statter.task.task;
+package com.statter.statter.task.task;
 
-import com.synctech.statter.constant.CacheKey;
-import com.synctech.statter.redis.jedis.JedisService;
+import com.statter.statter.constant.CacheKey;
+import com.statter.statter.redis.jedis.JedisService;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.core.SchedulerLock;
 import org.springframework.beans.factory.annotation.Value;

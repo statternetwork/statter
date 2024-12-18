@@ -1,4 +1,4 @@
-package com.synctech.statter.administrator.api.controller.v1.version.vo;
+package com.statter.statter.administrator.api.controller.v1.version.vo;
 
 import cn.hutool.core.util.ArrayUtil;
 import io.swagger.annotations.ApiParam;

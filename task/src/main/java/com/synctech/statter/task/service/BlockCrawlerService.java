@@ -1,9 +1,9 @@
-package com.synctech.statter.task.service;
+package com.statter.statter.task.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.synctech.statter.base.entity.TradeFlow;
-import com.synctech.statter.common.pool.service.PoolService;
+import com.statter.statter.base.entity.TradeFlow;
+import com.statter.statter.common.pool.service.PoolService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

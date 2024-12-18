@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api.controller.v1.admin.vo;
+package com.statter.statter.mining.pool.api.controller.v1.admin.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

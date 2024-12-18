@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.synctech</groupId>
+        <groupId>com.statter</groupId>
         <artifactId>statter</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <main.class>com.synctech.statter.mock.api.MockApiServerApplication</main.class>
+        <main.class>com.statter.statter.mock.api.MockApiServerApplication</main.class>
     </properties>
 
     <profiles>
@@ -47,12 +47,12 @@
     <dependencies>
         <!-- common -->
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.constant</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.common.util</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -99,7 +99,7 @@
             <!--<scope>compile</scope>-->
         </dependency>
         <dependency>
-            <groupId>com.synctech</groupId>
+            <groupId>com.statter</groupId>
             <artifactId>statter.component.redis</artifactId>
             <version>1.1.1</version>
             <scope>compile</scope>
@@ -162,30 +162,6 @@
                     </descriptors>
                 </configuration>
             </plugin>
-
-            <!-- mvn docker:build docker:push -->
-            <!--<plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <useGitCommitId>false</useGitCommitId>
-                    <imageName>swr.cn-north-4.myhuaweicloud.com/synctech/${project.artifactId}</imageName>
-                    <dockerDirectory>${project.basedir}/src/main/assembly</dockerDirectory>
-                    <forceTags>true</forceTags>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.basedir}/target</directory>
-                        </resource>
-                    </resources>
-                    <imageTags>
-                        <imageTag>${docker.image.tag}</imageTag>
-                    </imageTags>
-                    <serverId>swr.cn-north-4.myhuaweicloud.com</serverId>
-                    <registryUrl>http://swr.cn-north-4.myhuaweicloud.com</registryUrl>
-                </configuration>
-            </plugin>-->
 
             <!-- mvn jib:dockerBuild -->
             <plugin>

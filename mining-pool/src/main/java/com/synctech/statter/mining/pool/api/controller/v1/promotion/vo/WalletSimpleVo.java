@@ -1,4 +1,4 @@
-package com.synctech.statter.mining.pool.api.controller.v1.promotion.vo;
+package com.statter.statter.mining.pool.api.controller.v1.promotion.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 @Data
 public class WalletSimpleVo implements Serializable {

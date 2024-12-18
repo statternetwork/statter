@@ -1,4 +1,4 @@
-package com.synctech.statter.common.pool.vo;
+package com.statter.statter.common.pool.vo;
 
 import cn.hutool.core.util.NumberUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 
-import static com.synctech.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
+import static com.statter.statter.constant.Constant.WALLET_ADDRESS_LENGTH;
 
 
 @Data

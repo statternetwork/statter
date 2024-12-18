@@ -1,4 +1,4 @@
-package com.synctech.statter.task.config.shedlock;
+package com.statter.statter.task.config.shedlock;
 
 import net.javacrumbs.shedlock.core.LockProvider;
 import net.javacrumbs.shedlock.provider.redis.jedis.JedisLockProvider;

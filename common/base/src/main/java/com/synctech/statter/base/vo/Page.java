@@ -1,4 +1,4 @@
-package com.synctech.statter.base.vo;
+package com.statter.statter.base.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
